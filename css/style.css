@@ -1,0 +1,30 @@
+#helper {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    height: 1px;
+    width: 100%;
+    background: red;
+    
+}
+
+
+.renderable_container {
+    height: 800px;
+    border-left: 3px solid black;
+    border-bottom: 1px solid silver;
+}
+.renderable_container.active {
+    border-left: 3px solid green;
+}
+
+#sec_0 {
+    overflow: hidden;
+}
+
+#test_chamber {
+    background: url(../img/Test-Camber-Sign.jpg) repeat-x -400px 0;
+    height: 100%;
+    width: 100%;
+    
+}
