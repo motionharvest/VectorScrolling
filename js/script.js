@@ -21,7 +21,7 @@ function FollowMouse(){
         $win.on('mousemove', function(evt){
             mx = evt.pageX;
             my = evt.pageY;
-            console.log("mouse is moving")
+            //console.log("mouse is moving")
         });
         
         $goob.css({
@@ -31,7 +31,7 @@ function FollowMouse(){
     };
     var posX, posY;
     this.render = function(distFromCenter){
-    	console.log(distFromCenter);
+    	//console.log(distFromCenter);
         //anything that has to be done repeatedly as if on an onEnterFrame
         posX = $goob.position().left;
         posY = $goob.position().top;
