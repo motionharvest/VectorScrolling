@@ -44,11 +44,14 @@ function ExampleRenderable( jQueryObj ){
 Wrapped elements are added to RenderableContainers
 ```html
 <section class="renderable_container" id="section_0">
+    <div id="example"></div>
 </section>
 ```
 
 ```javascript
 var sectionZero = new RenderableContainer($("#section_0"));
+var exampleRenderable = new ExampleRenderable($("#example"));
+sectionZero.addChild(exampleRenderable);
 ```
 RenderableContainer groups are added to the render farm for processing
 
