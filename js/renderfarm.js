@@ -176,8 +176,10 @@ function IRenderable(){
  * 
  function IRenderable(){
 }
+IRenderable.prototype.core = function(){};
+IRenderable.prototype.focus = function(){};
 IRenderable.prototype.render = function(){};
-IRenderable.prototype.halt = function(){};
+IRenderable.prototype.blur = function(){};
 
 function FollowMouse(){
     var $win = $(window);
@@ -187,7 +189,9 @@ function FollowMouse(){
         'top': 0,
         'left':0
     });
-
+	this.core = function(){
+		return $goob;
+	}
     this.focus = function(){
         //with focus, assign events and callbacks
     }
