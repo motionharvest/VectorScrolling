@@ -189,9 +189,9 @@ function FollowMouse(){
         'top': 0,
         'left':0
     });
-	this.core = function(){
-		return $goob;
-	}
+    this.core = function(){
+        return $goob;
+    }
     this.focus = function(){
         //with focus, assign events and callbacks
     }
