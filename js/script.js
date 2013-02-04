@@ -164,10 +164,13 @@ jQuery(function($){
    var mouseToy = new FollowMouse();
    var zoomMap = new ZoomMap();
    
+   var three = new ThreeExample();
+   
    //RenderableContainer addChild()
    sectionZero.addChild(camberHall);
    sectionOne.addChild(mouseToy);
    sectionTwo.addChild(zoomMap);
+   sectionThree.addChild(three)
    
    //Start
    renderFarm.start();

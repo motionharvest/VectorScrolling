@@ -5,6 +5,7 @@
     height: 1px;
     width: 100%;
     background: red;
+    z-index: 9999;
     
 }
 
