@@ -10,19 +10,19 @@ Controls animation privilages (activate|deactivate|render)
 Tells interactive elements when to assign listeners
 Tells interactive elements when to remove listeners
 
-'''javascript
+```javascript
 //renderFarm requires access to  Window (until the library takes shape)
 var $win = $(window);
 
 //create the Render Farm
 var  renderFarm = new RenderFarm($win);
-'''
+```
 
 
 
 #### How it works ####
 Elements that have processing are wrapped in a class with 3 functions
-'''javascript
+```javascript
 function ExampleRenderable( jQueryObj ){
     var $core = jQueryObj;
     
@@ -39,26 +39,26 @@ function ExampleRenderable( jQueryObj ){
         //perfect for removing event listeners
     };
 }
-'''
+```
 
 Wrapped elements are added to RenderableContainers
-'''html
+```html
 <section class="renderable_container" id="section_0">
 </section>
-'''
+```
 
-'''javascript
+```javascript
 var sectionZero = new RenderableContainer($("#section_0"));
-'''
+```
 RenderableContainer groups are added to the render farm for processing
 
-'''javascript
+```javascript
 renderFarm.addGroup(sectionZero);
-'''
+```
 
 #### Start the process ####
-'''javascript
+```javascript
 renderFarm.start();
-'''
+```
 
 
