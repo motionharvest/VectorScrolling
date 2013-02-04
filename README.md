@@ -6,9 +6,9 @@ Performant-Scrolling-Construct
 Preframework and antipattern for controlling groupings of animation inside of site sections. Use for single page scrolling sites to limit code execution to the currently active panel.
 
 #### What It Does ####
-Controls animation privilages (activate|deactivate|render)
-Tells interactive elements when to assign listeners
-Tells interactive elements when to remove listeners
+Controls animation privilages (activate|deactivate|render).
+Tells interactive elements when to assign listeners.
+Tells interactive elements when to remove listeners.
 
 ```javascript
 //renderFarm requires access to  Window (until the library takes shape)
@@ -27,7 +27,7 @@ function ExampleRenderable( jQueryObj ){
     var $core = jQueryObj;
     
     this.focus = function(){
-        //happens when on the activated
+        //happens when activated
         //perfect time to add event listeners
     };
     this.render = function(){
