@@ -1,5 +1,4 @@
 //create some class to add to the screen
-
 function FollowMouse(){
     //construct
     var $win = $(window);
@@ -86,7 +85,51 @@ function ChamberHall($elem){
 ChamberHall.prototype = new IRenderable();
 
 
+function ZoomMap(){
+    
+    var map;
+      
+    var mapOptions = {
+      zoom: 2,
+      center: new google.maps.LatLng(41.316293,-72.904163),
+      mapTypeId: google.maps.MapTypeId.ROADMAP,
+      scrollwheel: false,
+      scaleControl: false,
+      navigationControl: false,
+      draggable: false
+    };
+    map = new google.maps.Map(document.getElementById('zoom_map'), mapOptions);
+      
 
+      
+    
+    this.focus = function(){
+      $(window).bind("scroll.zoom", zoom)  
+    };
+    var _offset = 0;
+    this.render = function(offset){
+        //offset already has calcuations about the distance from the center. so lets use that instead of doing the math ourselves
+        _offset = offset
+    }
+    function zoom(e){
+        /**
+         * if we're 100px higher than center - map between -400 and -100 to between the zoom levels of 2 (zoomed out) and 15 (zoomed in)
+         * if we're 100px lower than center - map between 100 and 400 to between zoom levels of 15 (zoomed in) and 2 (zoomed out)
+         * 
+         * This gives the effect of zooming in at first, then zooming out 
+         */
+        if(_offset < -100){
+           map.setZoom(Math.round(MathUtils.map(_offset, -400, -100, 2, 15)));
+        }else if(_offset > 100){
+           map.setZoom(Math.round(MathUtils.map(_offset, 100, 400, 15, 2))); 
+        }
+        
+        console.log("zooming")
+    }
+    this.blur = function(){
+        $(window).unbind('scroll.zoom');
+    };    
+}
 
 
 
@@ -119,11 +162,12 @@ jQuery(function($){
    //IRenderable
    var camberHall = new ChamberHall($('#test_chamber'));
    var mouseToy = new FollowMouse();
-   
+   var zoomMap = new ZoomMap();
    
    //RenderableContainer addChild()
    sectionZero.addChild(camberHall);
    sectionOne.addChild(mouseToy);
+   sectionTwo.addChild(zoomMap);
    
    //Start
    renderFarm.start();
