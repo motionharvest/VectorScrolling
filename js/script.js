@@ -102,16 +102,14 @@ function ZoomMap(){
       
 
       
-    
-    this.focus = function(){
-      $(window).bind("scroll.zoom", zoom)  
-    };
     var _offset = 0;
-    this.render = function(offset){
-        //offset already has calcuations about the distance from the center. so lets use that instead of doing the math ourselves
-        _offset = offset
+    
+    this.scroll = function(offset){
+       _offset = offset
+       zoom();
     }
-    function zoom(e){
+
+    function zoom(){
         /**
          * if we're 100px higher than center - map between -400 and -100 to between the zoom levels of 2 (zoomed out) and 15 (zoomed in)
          * if we're 100px lower than center - map between 100 and 400 to between zoom levels of 15 (zoomed in) and 2 (zoomed out)
@@ -126,9 +124,7 @@ function ZoomMap(){
         
         console.log("zooming")
     }
-    this.blur = function(){
-        $(window).unbind('scroll.zoom');
-    };    
+  
 }
 
 
@@ -166,11 +162,14 @@ jQuery(function($){
    
    var three = new ThreeExample();
    
+   var tweenExample = new ElaborateTweenExample();
+   
    //RenderableContainer addChild()
    sectionZero.addChild(camberHall);
    sectionOne.addChild(mouseToy);
    sectionTwo.addChild(zoomMap);
-   sectionThree.addChild(three)
+   sectionThree.addChild(three);
+   sectionFour.addChild(tweenExample);
    
    //Start
    renderFarm.start();

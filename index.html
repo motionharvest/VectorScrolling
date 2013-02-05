@@ -1,43 +1,179 @@
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset=utf-8 />
-<title>Performant Scrolling Construct</title>
-<link rel="stylesheet" type="text/css" href="css/style.css">
-</head>
-<body>
- <div id="helper">
-</div>
- <section class="renderable_container" id="sec_0">
-     <div id="test_chamber">
-     </div>
- </section>
-  <section class="renderable_container" id="sec_1">
-     
- </section>
-  <section class="renderable_container" id="sec_2">
-     <div id="zoom_map">
-       
-     </div>
- </section>
-  <section class="renderable_container" id="sec_3">
-     
- </section>
-  <section class="renderable_container" id="sec_4">
-     
- </section>
-  <section class="renderable_container" id="sec_5">
-     
- </section>
- 
-<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&amp;sensor=false"></script>
-<script type="text/javascript" src="js/libs/mathutils.js"></script>
-<script type="text/javascript" src="js/libs/jquery-1.7.2.min.js"></script>
-<script type="text/javascript" src="js/renderfarm.js"></script>
+    
+    <head>
+        <meta charset=utf-8 />
+        <title>Performant Scrolling Construct</title>
+        <link rel="stylesheet" type="text/css"
+        href="css/style.css">
+        <link rel="stylesheet" type="text/css" href="css/teaser.css">
+        <link rel="stylesheet" type="text/css" href="css/jquery-ui-1.9.1.custom.min.css">
+    </head>
+    
+    <body>
+        <div id="helper"></div>
+        <section class="renderable_container" id="sec_0">
+            <div id="test_chamber"></div>
+        </section>
+        <section class="renderable_container" id="sec_1"></section>
+        <section class="renderable_container" id="sec_2">
+            <div id="zoom_map"></div>
+        </section>
+        <section class="renderable_container" id="sec_3"></section>
+        <section class="renderable_container" id="sec_4">
+            <div id="timelineDemo" style="visibility:visible">
+                <div id="teaserHeader"><span style="top: -100px; opacity: 1; -webkit-transform: matrix(0, -1, 1, 0, 0, 0); -webkit-backface-visibility: hidden; left: 800px;"><img src="img/teaser/can.png" width="72" height="44"></span>
 
-<script type="text/javascript" src="js/libs/Three.js"></script>
-<script type="text/javascript" src="js/threeexample.js"></script>
+                    <span style="top: -100px; opacity: 1; -webkit-transform: matrix(0, -1, 1, 0, 0, 0); -webkit-backface-visibility: hidden; left: 800px;">
+                        <img src="img/teaser/your.png" width="89" height="44" />
+                    </span>
+                    <span style="top: -100px; opacity: 1; -webkit-transform: matrix(0, -1, 1, 0, 0, 0); -webkit-backface-visibility: hidden; left: 800px;"><img src="img/teaser/javascript.png" width="182" height="44"></span>
 
-<script type="text/javascript" src="js/script.js"></script>
-</body>
+                    <span style="top: -100px; opacity: 1; -webkit-transform: matrix(0, -1, 1, 0, 0, 0); -webkit-backface-visibility: hidden; left: 800px;">
+                        <img src="img/teaser/toolset.png" width="122" height="44" />
+                    </span>
+                    <span style="top: -100px; opacity: 1; -webkit-transform: matrix(0, -1, 1, 0, 0, 0); -webkit-backface-visibility: hidden; left: 800px;"><img src="img/teaser/elipse.png" width="25" height="44"></span>
+
+                </div>
+                <div id="staggerWrapper">
+                    <div id="staggerTextIntro" style="opacity: 0; left: auto; visibility: hidden;">stagger the animation of multiple elements with 1 line of code?</div>
+                    <div
+                    id="miniBoxesHolder" style="opacity: 0; visibility: hidden;">
+                        <div class="miniBox" style="opacity: 0; visibility: hidden; background-color: rgb(255, 102, 0); height: 0px; -webkit-transform: matrix(-0.93969, -0.34202, 0.34202, -0.93969, 0, 0);"></div>
+                        <div class="miniBox" style="opacity: 0; visibility: hidden; background-color: rgb(255, 102, 0); height: 0px; -webkit-transform: matrix(-0.93969, -0.34202, 0.34202, -0.93969, 0, 0);"></div>
+                        <div class="miniBox" style="opacity: 0; visibility: hidden; background-color: rgb(255, 102, 0); height: 0px; -webkit-transform: matrix(-0.93969, -0.34202, 0.34202, -0.93969, 0, 0);"></div>
+                        <div class="miniBox" style="opacity: 0; visibility: hidden; background-color: rgb(255, 102, 0); height: 0px; -webkit-transform: matrix(-0.93969, -0.34202, 0.34202, -0.93969, 0, 0);"></div>
+                        <div class="miniBox" style="opacity: 0; visibility: hidden; background-color: rgb(255, 102, 0); height: 0px; -webkit-transform: matrix(-0.93969, -0.34202, 0.34202, -0.93969, 0, 0);"></div>
+                        <div class="miniBox" style="opacity: 0; visibility: hidden; background-color: rgb(255, 102, 0); height: 0px; -webkit-transform: matrix(-0.93969, -0.34202, 0.34202, -0.93969, 0, 0);"></div>
+                        <div class="miniBox" style="opacity: 0; visibility: hidden; background-color: rgb(255, 102, 0); height: 0px; -webkit-transform: matrix(-0.93969, -0.34202, 0.34202, -0.93969, 0, 0);"></div>
+                        <div class="miniBox" style="opacity: 0; visibility: hidden; background-color: rgb(255, 102, 0); height: 0px; -webkit-transform: matrix(-0.93969, -0.34202, 0.34202, -0.93969, 0, 0);"></div>
+                        <div class="miniBox" style="opacity: 0; visibility: hidden; background-color: rgb(255, 102, 0); height: 0px; -webkit-transform: matrix(-0.93969, -0.34202, 0.34202, -0.93969, 0, 0);"></div>
+                        <div class="miniBox" style="opacity: 0; visibility: hidden; background-color: rgb(255, 102, 0); height: 0px; -webkit-transform: matrix(-0.93969, -0.34202, 0.34202, -0.93969, 0, 0);"></div>
+                        <div class="miniBox" style="opacity: 0; visibility: hidden; background-color: rgb(255, 102, 0); height: 0px; -webkit-transform: matrix(-0.93969, -0.34202, 0.34202, -0.93969, 0, 0);"></div>
+                        <div class="miniBox" style="opacity: 0; visibility: hidden; background-color: rgb(255, 102, 0); height: 0px; -webkit-transform: matrix(-0.93969, -0.34202, 0.34202, -0.93969, 0, 0);"></div>
+                        <div class="miniBox" style="opacity: 0; visibility: hidden; background-color: rgb(255, 102, 0); height: 0px; -webkit-transform: matrix(-0.93969, -0.34202, 0.34202, -0.93969, 0, 0);"></div>
+                        <div class="miniBox" style="opacity: 0; visibility: hidden; background-color: rgb(255, 102, 0); height: 0px; -webkit-transform: matrix(-0.93969, -0.34202, 0.34202, -0.93969, 0, 0);"></div>
+                        <div class="miniBox" style="opacity: 0; visibility: hidden; background-color: rgb(255, 102, 0); height: 0px; -webkit-transform: matrix(-0.93969, -0.34202, 0.34202, -0.93969, 0, 0);"></div>
+                        <div class="miniBox" style="opacity: 0; visibility: hidden; background-color: rgb(255, 102, 0); height: 0px; -webkit-transform: matrix(-0.93969, -0.34202, 0.34202, -0.93969, 0, 0);"></div>
+                        <div class="miniBox" style="opacity: 0; visibility: hidden; background-color: rgb(255, 102, 0); height: 0px; -webkit-transform: matrix(-0.93969, -0.34202, 0.34202, -0.93969, 0, 0);"></div>
+                        <div class="miniBox" style="opacity: 0; visibility: hidden; background-color: rgb(255, 102, 0); height: 0px; -webkit-transform: matrix(-0.93969, -0.34202, 0.34202, -0.93969, 0, 0);"></div>
+                </div>
+                <div id="staggerTextOut" style="opacity: 0; right: auto; visibility: hidden;">and then smoothly reverse it?</div>
+            </div>
+            <div class="skew" style="-webkit-transform: matrix(1, 0, 0.7071, 0.7071, 0, 0); left: 580px;"></div>
+            <div id="bezierPlugin" style="opacity: 0; visibility: visible; width: 560px; top: 0px; -webkit-transform: matrix(0, 0, 0, 0, 0, 0);">
+                <div id="bezierLogoWrapper" style="-webkit-transform: matrix(0.49694, 0.86777, -0.86777, 0.49694, 447, 135);">
+                    <div id="bezierLogo">
+                        <img src="img/teaser/bezierLogo_51x62.png">
+                    </div>
+                    <p></p>
+                </div>
+            </div>
+            <div id="bezierHead" style="opacity: 0; visibility: hidden; left: 30px;">animate smoothly along a Bezier curve?</div>
+            <div id="features">
+                <div class="featureWord" style="opacity: 0; visibility: hidden; -webkit-transform: matrix(1, 0, 0, 1, 0, 0);">repeat</div>
+                <div class="featureWord" style="opacity: 0; visibility: hidden; -webkit-transform: matrix(1, 0, 0, 1, 0, 0);">reverse</div>
+                <div class="featureWord" style="opacity: 0; visibility: hidden; -webkit-transform: matrix(1, 0, 0, 1, 0, 0);">timeshift</div>
+                <div class="featureWord" style="opacity: 0; visibility: hidden; -webkit-transform: matrix(1, 0, 0, 1, 0, 0);">pause</div>
+                <div class="featureWord" style="opacity: 0; visibility: hidden; -webkit-transform: matrix(1, 0, 0, 1, 0, 0);">use labels</div>
+                <div class="featureWord" style="opacity: 0; visibility: hidden; -webkit-transform: matrix(1, 0, 0, 1, 0, 0);">jump to any time</div>
+                <div class="featureWord" style="opacity: 0; visibility: hidden; -webkit-transform: matrix(1, 0, 0, 1, 0, 0);">repeat infinitely</div>
+                <div class="featureWord" style="opacity: 0; visibility: hidden; -webkit-transform: matrix(1, 0, 0, 1, 0, 0);">yoyo</div>
+                <div class="featureWord" style="opacity: 0; visibility: hidden; -webkit-transform: matrix(1, 0, 0, 1, 0, 0);">stagger</div>
+                <div class="featureWord" style="opacity: 0; visibility: hidden; -webkit-transform: matrix(1, 0, 0, 1, 0, 0);">work in IE6</div>
+                <div class="featureWord" style="opacity: 0; visibility: hidden; -webkit-transform: matrix(1, 0, 0, 1, 0, 0);">animate colors</div>
+                <div class="featureWord" style="opacity: 0; visibility: hidden; -webkit-transform: matrix(1, 0, 0, 1, 0, 0);">do CSS3 transforms</div>
+                <div class="featureWord" style="opacity: 0; visibility: hidden; -webkit-transform: matrix(1, 0, 0, 1, 0, 0);">nest timelines</div>
+                <div class="featureWord" style="opacity: 0; visibility: hidden; -webkit-transform: matrix(1, 0, 0, 1, 0, 0);">create killer</div>
+                <div class="featureWord" style="opacity: 0; visibility: hidden; -webkit-transform: matrix(1, 0, 0, 1, 0, 0);">effects</div>
+                <div class="featureWord" style="opacity: 0; visibility: hidden; -webkit-transform: matrix(1, 0, 0, 1, 0, 0);">like this one?</div>
+            </div>
+            <div id="introHead" style="opacity: 0; -webkit-transform: matrix(0.5, 0, 0, 0.5, 0, 0);"></div>
+            <div id="introLogosWrapper" style="z-index:3; visibility:hidden;">
+                <div id="introLogoTweenLite" style="opacity: 0; visibility: hidden; -webkit-transform: matrix(0.5, 0, 0, 0.5, 0, 0);"></div>
+                <div id="introLogoTimelineLite" style="opacity: 0; visibility: hidden; -webkit-transform: matrix(0.5, 0, 0, 0.5, 0, 0);"></div>
+                <div id="introLogoTweenMax" style="opacity: 0; visibility: hidden; -webkit-transform: matrix(0.5, 0, 0, 0.5, 0, 0);"></div>
+                <div id="introLogoTimelineMax" style="opacity: 0; visibility: hidden; -webkit-transform: matrix(0.5, 0, 0, 0.5, 0, 0);"></div>
+            </div>
+            <div id="jQueryWrapper">
+                <div id="jQueryTagline">
+                    <div id="andIsIt" style="opacity: 1; width: 276px;"></div>
+                    <div id="twenty" style="opacity: 1; background-position: 10px 0px;"></div>
+                    <div id="faster" style="opacity: 1; background-position: 0px 0px;"></div>
+                    <div id="thanJquery" style="opacity: 1; background-position: 0px 0px;"></div>
+                    <p></p>
+                </div>
+                <div id="chartBars">
+                    <div class="bar blueBar" style="left: 9px; top: 139px; opacity: 1;"></div>
+                    <div class="bar blueBar" style="left: 109px; top: 136px; opacity: 1;"></div>
+                    <div class="bar blueBar" style="left: 208px; top: 130px; opacity: 1;"></div>
+                    <div class="bar blueBar" style="left: 308px; top: 125px; opacity: 1;"></div>
+                    <div class="bar greenBar" style="left: 403px; top: 10px; opacity: 1;"></div>
+                    <p></p>
+                </div>
+                <div id="chartBaseline" style="opacity: 1; top: 267px;"></div>
+            </div>
+            <div id="introNavBarTip" style="opacity: 0; visibility: hidden; top: 304px;"></div>
+            <div id="logosHolder">
+                <div class="logo" style="-webkit-transform: matrix(0.86602, 0.5, -0.5, 0.86602, 0, 0); top: 580px; left: 584.769680260215px;"
+                /></div>
+            <div class="logo" style="-webkit-transform: matrix(0.86602, 0.5, -0.5, 0.86602, 0, 0); top: 580px; left: 685.4950843052939px;"></div>
+            <div class="logo" style="-webkit-transform: matrix(0.86602, 0.5, -0.5, 0.86602, 0, 0); top: 580px; left: 644.1818273533136px;"></div>
+            <div class="logo" style="-webkit-transform: matrix(0.86602, 0.5, -0.5, 0.86602, 0, 0); top: 580px; left: 510.76945561449975px;"></div>
+            <div class="logo" style="-webkit-transform: matrix(0.86602, 0.5, -0.5, 0.86602, 0, 0); top: 580px; left: 473.2315662340261px;"></div>
+            <div class="logo" style="-webkit-transform: matrix(0.86602, 0.5, -0.5, 0.86602, 0, 0); top: 580px; left: 652.4751370679587px;"></div>
+            <div class="logo" style="-webkit-transform: matrix(0.86602, 0.5, -0.5, 0.86602, 0, 0); top: 580px; left: 658.3373311231844px;"></div>
+            <div class="logo" style="-webkit-transform: matrix(0.86602, 0.5, -0.5, 0.86602, 0, 0); top: 580px; left: 664.8979379469529px;"></div>
+            <div class="logo" style="-webkit-transform: matrix(0.86602, 0.5, -0.5, 0.86602, 0, 0); top: 580px; left: 509.34556200169027px;"></div>
+            <div class="logo" style="-webkit-transform: matrix(0.86602, 0.5, -0.5, 0.86602, 0, 0); top: 580px; left: 614.4121197075583px;"></div>
+            <div class="logo" style="-webkit-transform: matrix(0.86602, 0.5, -0.5, 0.86602, 0, 0); top: 580px; left: 595.1444583269767px;"></div>
+            <div class="logo" style="-webkit-transform: matrix(0.86602, 0.5, -0.5, 0.86602, 0, 0); top: 580px; left: 679.2346603842452px;"></div>
+            <div class="logo" style="-webkit-transform: matrix(0.86602, 0.5, -0.5, 0.86602, 0, 0); top: 580px; left: 605.7001154194586px;"></div>
+            <div class="logo" style="-webkit-transform: matrix(0.86602, 0.5, -0.5, 0.86602, 0, 0); top: 580px; left: 511.93702125689015px;"></div>
+            <div class="logo" style="-webkit-transform: matrix(0.86602, 0.5, -0.5, 0.86602, 0, 0); top: 580px; left: 527.6402854733169px;"></div>
+            <div class="logo" style="-webkit-transform: matrix(0.86602, 0.5, -0.5, 0.86602, 0, 0); top: 580px; left: 659.7729613794945px;"></div>
+            <div class="logo" style="-webkit-transform: matrix(0.86602, 0.5, -0.5, 0.86602, 0, 0); top: 580px; left: 591.7862855503336px;"></div>
+            <div class="logo" style="-webkit-transform: matrix(0.86602, 0.5, -0.5, 0.86602, 0, 0); top: 580px; left: 504.99388684052974px;"></div>
+            <div class="logo" style="-webkit-transform: matrix(0.86602, 0.5, -0.5, 0.86602, 0, 0); top: 580px; left: 598.1489858031273px;"></div>
+            <div class="logo" style="-webkit-transform: matrix(0.86602, 0.5, -0.5, 0.86602, 0, 0); top: 580px; left: 680.4018686315976px;"></div>
+            <div class="logo" style="-webkit-transform: matrix(0.86602, 0.5, -0.5, 0.86602, 0, 0); top: 580px; left: 539.7048151143827px;"></div>
+            <div class="logo" style="-webkit-transform: matrix(0.86602, 0.5, -0.5, 0.86602, 0, 0); top: 580px; left: 577.9882192518562px;"></div>
+            <div class="logo" style="-webkit-transform: matrix(0.86602, 0.5, -0.5, 0.86602, 0, 0); top: 580px; left: 650.7468269346282px;"></div>
+            <div class="logo" style="-webkit-transform: matrix(0.86602, 0.5, -0.5, 0.86602, 0, 0); top: 580px; left: 474.278523856774px;"></div>
+            <div class="logo" style="-webkit-transform: matrix(0.86602, 0.5, -0.5, 0.86602, 0, 0); top: 580px; left: 571.2016580300406px;"></div>
+            <div class="logo" style="-webkit-transform: matrix(0.86602, 0.5, -0.5, 0.86602, 0, 0); top: 580px; left: 642.7402126509696px;"></div>
+            <div class="logo" style="-webkit-transform: matrix(0.86602, 0.5, -0.5, 0.86602, 0, 0); top: 580px; left: 653.5325841186568px;"></div>
+            <div class="logo" style="-webkit-transform: matrix(0.86602, 0.5, -0.5, 0.86602, 0, 0); top: 580px; left: 585.4218589165248px;"></div>
+            <div class="logo" style="-webkit-transform: matrix(0.86602, 0.5, -0.5, 0.86602, 0, 0); top: 580px; left: 546.4502859767526px;"></div>
+            <div class="logo" style="-webkit-transform: matrix(0.86602, 0.5, -0.5, 0.86602, 0, 0); top: 580px; left: 696.6935040918179px;"></div>
+            </div>
+            
+                <div id="sliderBar" class="timelineSlider ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all">
+                    <a class="ui-slider-handle ui-state-default ui-corner-all" href="#" style="left: 93.3%;"></a>
+                </div>
+                
+            
+            <div class="question" style="opacity: 1; -webkit-transform: matrix(1, 0, 0, 1, 0, 0); top: -100px; left: 1000px;"></div>
+            <div id="loading" style="position: absolute; width: 560px; height: 420px; background-color: black; opacity: 0; visibility: hidden;">
+                <div style="position:absolute; left:255px; top:185px;">
+                    <img src="img/teaser/preloader.gif" width="50" height="50">
+                </div>
+            </div>
+            </div>
+        </section>
+        <section class="renderable_container" id="sec_5">
+		    </section>
+        <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&amp;sensor=false"></script>
+        <script type="text/javascript" src="js/libs/mathutils.js"></script>
+        <script type="text/javascript" src="js/libs/jquery-1.9.0.js"></script>
+        <script type="text/javascript" src="js/renderfarm.js"></script>
+        <script type="text/javascript" src="js/libs/Three.js"></script>
+        <script type="text/javascript" src="js/threeexample.js"></script>
+        <script type="text/javascript" src="js/libs/TweenMax.min.js"></script>
+        <script type="text/javascript" src="js/libs/jquery-ui-1.10.0.custom.js"></script>
+        <script type="text/javascript" src="js/libs/teaser.js"></script>
+        <script type="text/javascript" src="js/script.js"></script>
+        
+    </body>
+
 </html>

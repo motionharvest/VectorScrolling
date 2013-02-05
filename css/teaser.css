@@ -1,0 +1,401 @@
+@charset "UTF-8";
+
+
+
+
+#timelineDemo{
+	-webkit-font-smoothing:antialiased; 
+	position:relative;
+	width:560px;
+	height:420px;
+	overflow:hidden;
+	margin: 0px auto;
+	background-color:#000;
+	visibility:hidden;
+	}
+	
+#teaserHeader{
+	position:absolute;
+	text-align:center;
+	width:490px;
+	top:24px;
+	left:30px;
+	
+	}	
+	
+#teaserHeader span{
+	position:relative;
+	display:inline-block;
+	}
+	
+	
+
+#staggerWrapper{
+	position:absolute;
+	width:505px;
+	top:100px;
+	left:30px;
+	
+	}
+	
+#staggerTextIntro{
+	position:relative;
+	font-size:16px;
+	color:#c2c2c2;
+	margin-bottom:12px;
+	
+	}	
+	
+
+	
+#staggerTextOut{
+	position:relative;
+	text-align:right;
+	font-size:16px;
+	color:#c2c2c2;
+	white-space:nowrap;
+	height:40px;
+	}			
+
+#miniBoxesHolder{
+	position:relative;
+	margin-top:3px;
+	height:115px;
+	width:504px;
+	
+	}	
+
+.miniBox{
+	position:relative;
+	float:left;
+	width:26px;
+	height:100px;
+	background-color:#f60;
+	margin:1px;	
+	-webkit-backface-visibility:hidden;	
+	}
+
+.skew {
+	position:absolute;
+	background: url(../img/teaser/skew_234x60.png) no-repeat;
+	width: 234px;
+	height: 60px;
+	top:135px;
+	left:-260px;
+	-webkit-backface-visibility:hidden;	
+}
+
+.question {
+	position:absolute;
+	background: url(../img/teaser/question.png) no-repeat;
+	width: 132px;
+	height: 240px;
+	left:213px;
+	top:75px;	
+	-webkit-backface-visibility:hidden;	
+}
+
+#bezierHead{
+	position:absolute;
+	left:415px;
+	top:75px;
+	width:800px;
+	font-size:16px;
+	color:#c2c2c2;
+	text-wrap:none;
+	visibility:hidden;
+	}
+	
+#bezierPlugin{
+	background:url(../img/teaser/bezierPathNew.png);
+	background-repeat: no-repeat;
+	position:absolute;
+	left:-0px;
+	top:0px;
+	width:560px;
+	height:420px;
+	overflow:hidden;
+	/*background-color: rgba(0, 100, 0, .5);*/
+	}
+	
+#bezierLogoWrapper{
+	position:absolute;
+	/* note if these sizes get bigger, drift occurs 
+	IE 8 and 7 had trouble with this. Clipping would occur based on the width/height
+	*/
+	width:2px;
+	height:2px;	
+	
+	left:55px;
+	top:130px;
+	
+	*width:51px;
+	*height:62px;
+	zoom: 1;
+	}
+	
+/* now a div that contains an img tag */		
+#bezierLogo{
+	position:absolute;
+	width:51px;
+	height:62px;
+	left:-21px;
+	top:-29px;
+	zoom:1;
+	
+	*left:0px;
+	*top:0px;
+	}	
+
+#features{
+	position:absolute;
+	width:560px;
+	top:150px;
+	}
+	
+.featureWord{
+	position: absolute;
+	
+	font-weight: bold;
+	font-size: 100px;
+	color: #fff;
+	width: 1000px;
+	left:-220px;
+	top:-40px;
+	text-align: center;
+	text-wrap: none;
+	white-space: nowrap;
+	margin: 0px auto;
+	line-height: 140px;
+	}	
+
+.logo {
+	position:absolute;
+	background: url(../img/teaser/logo_transparent.png) no-repeat;
+	height: 60px;
+	width: 60px;
+	top:580px;
+	left:-100px;
+}
+
+
+#jQueryTagline{
+	position:absolute;
+	left:33px;
+	top:25px;
+	width:176px;
+	height:160px;
+	}
+#andIsIt {
+	position:absolute;
+	background-image: url(../img/teaser/andIsItUpTo.jpg);
+	background-repeat: no-repeat;
+	height: 44px;
+	width: 276px;
+}
+
+
+	 
+#introHead{
+	 background:url(../img/teaser/gsap12.jpg);
+	 /*background-position: 267px 0px;*/
+	 background-repeat: no-repeat;
+	 width: 348px;
+	 height: 222px;
+	
+	 position:absolute;
+	 left:139px;
+	 top:0px;
+	/* z-index:2; */
+	 }
+	 
+ 
+	 
+
+	
+#introBody p{
+	position:relative;
+	text-align:center;
+	font-size:16px;
+	line-height:24px;
+	color:#fff;
+	width:800px;
+	margin: 0px;
+	}
+	
+#introLogosWrapper{
+	position:absolute;
+	left:105px;
+	top:185px;
+	color:#0f0;
+	width:560px;
+	height:76px;
+	
+	
+	}	
+	
+#introLogoTweenLite{
+	background-repeat: no-repeat;
+	position: absolute;
+	left: 0px;
+	width: 146px;
+	height: 37px;
+	background-image: url(../img/teaser/logo_tweenlite_146x37.png);
+	top: 0px;
+	}	
+	
+#introLogoTimelineLite{
+	background-repeat: no-repeat;
+	position: absolute;
+	left: 173px;
+	width: 170px;
+	height: 37px;
+	background-image: url(../img/teaser/logo_timelinelite_170x37.png);
+	top: 0px;
+	}	
+	
+#introLogoTweenMax{
+	background-repeat: no-repeat;
+	position: absolute;
+	left: 0px;
+	top: 43px;
+	width: 153px;
+	height: 33px;
+	background-image: url(../img/teaser/logo_tweenMax_153x33.png);
+	}
+	
+#introLogoTimelineMax{
+	background-repeat: no-repeat;
+	position: absolute;
+	left: 173px;
+	width: 181px;
+	height: 33px;
+	top: 43px;
+	background-image: url(../img/teaser/logo_timelinemax_181x33.png);
+	}				
+
+#introNavBarTip{
+	background-image: url(../img/teaser/navbar_tip.png);
+	background-repeat: no-repeat;
+	height: 31px;
+	width: 360px;
+	position:absolute;
+	left: 99px;
+	top: 284px;	
+	
+}
+	
+	 	 
+		
+#funBox{
+	width:500px;
+	height:100px;
+	background: rgb(25, 25, 25); /* Fall-back for browsers that don't support rgba */
+    background: rgba(25, 25, 25, .9);
+	position:absolute;
+	left:30px;
+	top:610px;
+	z-index:5;
+	}
+	
+.timelineSlider {
+	
+    width: 400px;
+	height:15px;
+	margin-left:50px;
+	margin-top:4px;
+     }			
+#twenty {
+	position: absolute;
+	left:-10px;
+	top:44px;
+	height: 64px;
+	width: 117px;
+	background-image: url(../img/teaser/20x.jpg);
+	background-repeat: no-repeat;
+}
+
+#faster {
+	position: absolute;
+	top:44px;
+	left:107px;
+	height: 64px;
+	width: 180px;
+	background-image: url(../img/teaser/faster.jpg);
+	background-repeat: no-repeat;
+}
+
+#jQueryWrapper{
+	position:absolute;
+	width:560px;
+	height:420px;
+	/*z-index:3;*/
+	}
+
+#thanJquery{
+	position: absolute;
+	top: 108px;
+	width:276px;
+	height:52px;
+	background: url(../img/teaser/thanJquery.jpg) no-repeat;
+	
+	}
+
+#chartBaseline{
+	position:absolute;
+	left:26px;
+	top:267px;
+	width:505px;
+	height:160px;
+	background: url(../img/teaser/chartBaseline.png) no-repeat;
+	background-color:#000;
+	}
+	
+#chartBars{
+	position:absolute;
+	width:505px;
+	height:148px;
+	left:26px;
+	top:119px;
+	}	
+	
+
+	
+.blueBar{
+	position:absolute;
+	width:83px;
+	height:23px;
+	background:url(../img/teaser/blueBar.png) no-repeat;
+	}
+	
+.greenBar{
+	position:absolute;
+	width:96px;
+	height:138px;
+	background:url(../img/teaser/greenBar.png) no-repeat;
+	}	
+	
+#speedTest{
+	position:absolute;
+	top:308px;
+	width:560px;
+	text-align:center;
+	font-style:italic;
+	color:#ccc;
+	font-size:12px;
+	
+	}
+#speedTest a:link {
+	color:#90e500;
+	}	
+	
+#speedTest a:visited {
+	color:#90e500;
+	}	
+			
+	
+.k-button{
+	font-size:12px;
+	margin: 0px 3px;
+	}		
+

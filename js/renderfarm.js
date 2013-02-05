@@ -59,7 +59,10 @@ function RenderFarm( $window ){
             _currActive = _nextActive; 
         }
         
+        _currActive.scrollAll(_middle - _currActive.getCenter());
+        
     })
+    
     //don't forget to step.
     // include the renderAnimFrame in here. and call _currActive.render() over and over.
     function animloop(){
@@ -136,6 +139,14 @@ function RenderableContainer( selector ){
         for(var i = 0; i < IR_Children.length; i++){
             if(IR_Children[i].hasOwnProperty('render')){
                 IR_Children[i].render(distance);
+            }
+        }
+    };
+    
+    this.scrollAll = function(distance){
+        for(var i = 0; i < IR_Children.length; i++){
+            if(IR_Children[i].hasOwnProperty('scroll')){
+                IR_Children[i].scroll(distance);
             }
         }
     };
