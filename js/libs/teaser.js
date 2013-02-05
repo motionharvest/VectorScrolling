@@ -211,9 +211,16 @@ function ElaborateTweenExample(){
         buildMainTimeline();
     }
     
-
+    var tarPerc = 0;
+    var currPerc = 0;
+    
+    this.render = function(){
+        currPerc = ((tarPerc - currPerc) / 35) + currPerc;
+        mainTimeline.progress(currPerc);    
+    }
     this.scroll = function( offset ){
-        mainTimeline.progress(MathUtils.map(offset, -400, 0, 0, 1));
+        tarPerc = MathUtils.map(offset, -400, 400, 0, 1)
+        
     }
 
     
