@@ -59,10 +59,7 @@ function ChamberHall($elem){
     
     var $core = $elem;
     
-    //core omitted because its already a dom element
-     this.focus = function(){
 
-     };
      var pos = -400;
      var tar = 0;
      
@@ -104,6 +101,7 @@ function ZoomMap(){
       
     var _offset = 0;
     
+    //triggered from the top
     this.scroll = function(offset){
        _offset = offset
        zoom();

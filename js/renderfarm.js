@@ -59,7 +59,10 @@ function RenderFarm( $window ){
             _currActive = _nextActive; 
         }
         
-        _currActive.scrollAll(_middle - _currActive.getCenter());
+        if(_currActive){
+            //since we're already scrolling, might as well save some resources and pass the event along
+            _currActive.scrollAll(_middle - _currActive.getCenter());
+        }
         
     })
     
@@ -143,6 +146,7 @@ function RenderableContainer( selector ){
         }
     };
     
+    //if children have a scroll method, give it a call, and pass along the distance it is from the center
     this.scrollAll = function(distance){
         for(var i = 0; i < IR_Children.length; i++){
             if(IR_Children[i].hasOwnProperty('scroll')){
