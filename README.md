@@ -32,9 +32,13 @@ function ExampleRenderable( jQueryObj ){
         //happens when activated
         //perfect time to add event listeners
     };
-    this.render = function(){
+    this.render = function(offset){
         //loops while in focus
         //perfect for stepping through animation formulas
+    };
+    this.scroll = function(offset){
+        //window scroll is passed down as well
+        //use this if you don't want to listen/unlisten to your own
     };
     this.blur = function(){
         //happens when deactivated
