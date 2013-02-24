@@ -14,7 +14,7 @@ window.requestAnimFrame = (function(){
 /**
  *  Here's what I see.
  *  Controllable sections of animation.
- *  When scrolling determine which section is closest to the middle of the screen and activate it.
+ *  When scrolling - determine which section is closest to the middle of the screen and activate it.
  */
 
 
@@ -210,8 +210,11 @@ function FollowMouse(){
     this.focus = function(){
         //with focus, assign events and callbacks
     }
-    this.render = function(){
+    this.render = function( offset ){
         //anything that has to be done repeatedly as if on an onEnterFrame
+    }
+    this.scroll = function( offset ){
+        //gives access to the window's scroll method
     }
     this.blur = function(){
         //do what you need to stop this class from running calculations
