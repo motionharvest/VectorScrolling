@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset=utf-8 />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	
+	<title>Scroll Mastery - Start or Pause Simple </title>
+	
+	<style>
+		section {
+			border: solid 2px red;
+			width: 100%;
+			height: 600px;
+		}
+		section.active {
+			border: solid 3px green;
+		}
+	</style>
+	<link rel="stylesheet" href="css/flexslider.css" type="text/css" media="screen">
+</head>
+
+<body>
+	
+	<section id="sec_0">
+		The flexslider is down in the 4th section. It should be on the first frame when you scroll to it.<br>
+		Wherever you leave it when you scroll away will be where it stays until you get back.
+	</section>
+	<section id="sec_1">
+	  
+	</section>
+	<section id="sec_2">
+	  
+	</section>
+	<section id="sec_3">
+	  <!-- Place somewhere in the <body> of your page -->
+		<div class="flexslider">
+			<ul class="slides">
+				<li>
+					<img src="images/slide1.jpg" />
+				</li>
+				<li>
+					<img src="images/slide2.jpg" />
+				</li>
+				<li>
+					<img src="images/slide3.jpg" />
+				</li>
+				<li>
+					<img src="images/slide4.jpg" />
+				</li>
+			</ul>
+		</div>
+	</section>
+	<section id="sec_4">
+	  
+	</section>
+	<section id="sec_5">
+	  
+	</section>
+	<section id="sec_6">
+	  
+	</section>
+
+	<script type="text/javascript" src="js/libs/jquery-1.9.0.js"></script>
+	<script type="text/javascript" src="js/libs/jquery.flexslider.js"></script>
+	<script type="text/javascript" src="../../src/renderfarm.js"></script>
+	<script type="text/javascript">
+		//RenderFarm uses jQuery - Best practice to ensure the DOM is ready for querying
+		jQuery(function($){
+			/*
+				Slightly Harder Example
+				Activating sections by adding a class name
+				Add an object to a container
+			*/
+			
+			//1) Define which element is scrolling
+			var win = $( window );
+			
+			//2) Create a RenderFarm
+			var renderfarm = new RenderFarm( win );
+			
+			//3) Create groups
+			var sectionO = new RenderableContainer( $('#sec_0') );
+			var section1 = new RenderableContainer( $('#sec_1') );
+			var section2 = new RenderableContainer( $('#sec_2') );
+			var section3 = new RenderableContainer( $('#sec_3') );
+			var section4 = new RenderableContainer( $('#sec_4') );
+			var section5 = new RenderableContainer( $('#sec_5') );
+			var section6 = new RenderableContainer( $('#sec_6') );
+			
+			
+			//3b) Add groups
+			renderfarm.addGroup( sectionO );
+			renderfarm.addGroup( section1 );
+			renderfarm.addGroup( section2 );
+			renderfarm.addGroup( section3 );
+			renderfarm.addGroup( section4 );
+			renderfarm.addGroup( section5 );
+			renderfarm.addGroup( section6 );
+			
+			//4) Create a child object to recieve events
+			/*
+				Store the element
+				
+				Apply your jQuery Plugin
+				
+				Control the Plugin (each plugin is different)
+				
+			*/
+			var flexElement = $('.flexslider');
+			
+			flexElement.flexslider({
+				animation: "slide",
+				slideshowSpeed: 2000 
+			});
+			
+			//start paused
+			flexElement.flexslider("pause");
+			
+			// Object for a group to control
+			var flexSliderController = {
+				focus: function(){
+					flexElement.flexslider("play");
+				},
+				blur: function(){
+					flexElement.flexslider("pause");
+				}
+			};
+			
+			//4b) Add the controller to a groups
+			section3.addChild(flexSliderController);
+			
+			
+			//5) Start monitoring groups
+			renderfarm.start();
+		});
+	
+	</script>
+	
+	<!-- Don't forget GA -->
+	
+</body>
+
+</html>
