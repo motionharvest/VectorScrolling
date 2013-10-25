@@ -53,22 +53,21 @@ Wrapped elements are added to RenderableContainers
 	    <div id="example"></div>
 	</section>
 
-Make it into a new ExampleRenderable class
+RenderableContainers are sections that facilitate child element's active and render states.
+The div inside of the renderable_container is being controlled so lets set that up.
 
 	var sectionZero = new RenderableContainer($("#section_0"));
 	var exampleRenderable = new ExampleRenderable($("#example"));
 	sectionZero.addChild(exampleRenderable);
 
 
-RenderableContainer groups are added to the render farm for processing
+Add the RenderableContainer as a group for processing. Then add the group to the render farm.
 
-javascript
 
 	renderFarm.addGroup(sectionZero);
 
 
-#### Start the process ####
-javascript
+#### Start up the engine ####
 
 	renderFarm.start();
 
