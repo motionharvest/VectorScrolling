@@ -172,7 +172,7 @@ function RenderableContainer( selector ){
 	
     this.prepare = function(){
        //establish a knowledge of where this element is
-       _top = $container.position().top;
+       _top = $container.offset().top;
        _bottom = _top + $container.height();
        _middle = _top + (_bottom - _top) * .5;
 	   
