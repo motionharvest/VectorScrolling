@@ -3,72 +3,39 @@ Performant-Scrolling-Construct
 
 
 #### JavaScript Scrolling Construct ####
-Preframework and antipattern for controlling groupings of animation inside of site sections. Use for single page scrolling sites to limit code execution to the currently active panel.
+Completely re-done.
 
-Example: [http://www.digitalsurgeonsdev.com/epicawesome/scroll/](http://www.digitalsurgeonsdev.com/epicawesome/scroll/)
+Simple to use interface.
 
-#### What It Does ####
-Controls animation privilages (activate|deactivate|render).
-Tells interactive elements when to assign listeners.
-Tells interactive elements when to remove listeners.
+    $('.className').piggy({
+ 		focus: function(){
+        },
+		blur: function(offBottom){
+		},
+		scroll: function(offset){
+		},
+		render: function(offset){
+		}
+    });
 
-	
-	//renderFarm requires access to  Window (until the library takes shape)
-	var $win = $(window);
-	
-	//create the Render Farm
-	var  renderFarm = new RenderFarm($win);
+That's it. Nothing hard. Just target an element, and give it instructions for the cases that fit your needs.
 
+#### focus ####
+`focus` is triggered when the element appears on the screen
 
+#### blur ####
+`blur` is triggered when the element is scrolled off the screen. A boolean is passed to indicate if the element has been scrolled off the bottom.
 
+#### scroll ####
+`scroll` is triggered when the element is on the screen and the user scrolls. A value between -1 and 1 is passed to indicate how much of the element is on the screen.
 
-#### How it works ####
-Elements that have processing are wrapped in a class with 3 functions
+When the element is exactly centered on the screen, offset is 0 
 
-	function ExampleRenderable( jQueryObj ){
-	    var $core = jQueryObj;
-	    
-	    this.focus = function(){
-	        //happens when activated
-	        //perfect time to add event listeners
-	    };
-	    this.render = function(offset){
-	        //loops while in focus
-	        //perfect for stepping through animation formulas
-	    };
-	    this.scroll = function(offset){
-	        //window scroll is passed down as well
-	        //use this if you don't want to listen/unlisten to your own
-	    };
-	    this.blur = function(){
-	        //happens when deactivated
-	        //perfect for removing event listeners
-	    };
-	}
+#### render ####
+`render` is triggered when the element is on the screen using requestAnimationFrame. A value between -1 and 1 is passed to indicate how much of the element is on the screen.
 
-Wrapped elements are added to RenderableContainers
+When the element is exactly centered on the screen, offset is 0
 
+There is a demo included showing how to control a Greensock TimelineLite animation with this new implementation. Everything else should be easy to figure out for yourself.
 
-	<section class="renderable_container" id="section_0">
-	    <div id="example"></div>
-	</section>
-
-RenderableContainers are sections that facilitate child element's active and render states.
-The div inside of the renderable_container is being controlled so lets set that up.
-
-	var sectionZero = new RenderableContainer($("#section_0"));
-	var exampleRenderable = new ExampleRenderable($("#example"));
-	sectionZero.addChild(exampleRenderable);
-
-
-Add the RenderableContainer as a group for processing. Then add the group to the render farm.
-
-
-	renderFarm.addGroup(sectionZero);
-
-
-#### Start up the engine ####
-
-	renderFarm.start();
-
-
+Enjoy animating everything!
