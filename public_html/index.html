@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset=utf-8 />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+	<title>Scroll Mastery - Start or Pause Simple </title>
+
+	<style>
+		section {
+			border: solid 2px red;
+			width: 100%;
+			height: 600px;
+		}
+		section.active {
+			border: solid 3px green;
+		}
+	</style>
+	<link rel="stylesheet" href="css/flexslider.css" type="text/css" media="screen">
+</head>
+
+<body>
+
+	<section id="sec_0">
+		This is my new favorite thing.
+	</section>
+	<section id="sec_1">
+
+	</section>
+	<section id="sec_2">
+
+	</section>
+	<section id="sec_3">
+		
+	</section>
+	<style type="text/css">
+		/*
+	 	Section Four
+	 * */
+		#sec_4 {
+			overflow: hidden;
+			position: relative;
+    		height: 638px;
+    		width: 100%;
+			background: url(img/tactile_noise.png);
+			padding: 0px;
+		}
+		#sec_4 .bg{
+			position: absolute;
+			width: 1529px;
+			height: 552px;
+			margin: auto 50%;
+			left: -764px;
+			top: 30px;
+			background: url(img/dungeon-bg.png);
+		}
+		#sec_4 .slate{
+			position: absolute;
+			width: 245px;
+			height: 127px;
+			margin: auto 50%;
+			left: -112px;
+			top: 0px;
+			background: url(img/dungeon-slate.png);
+		}
+		#sec_4 .thumbnails{
+			position: absolute;
+			width: 1065px;
+			height: 139px;
+			margin: auto 50%;
+			left: -532px;
+			top: 480px;
+			background: url(img/dungeon-thumbnails.png);
+		}
+		#sec_4 .frame{
+			position: absolute;
+			width: 774px;
+			height: 469px;
+			margin: auto 50%;
+			left: -387px;
+			top: 100px;
+			background: url(img/dungeon-frame.png);
+		}
+		#sec_4 .beast{
+			position: absolute;
+			width: 627px;
+			height: 434px;
+			margin: auto 50%;
+			left: -258px;
+			top: 220px;
+			background: url(img/dungeon-beast.png);
+		}
+		#sec_4 .beast-head{
+			position: absolute;
+			width: 225px;
+			height: 294px;
+			margin: auto 50%;
+			left: -157px;
+			top: 230px;
+			background: url(img/dungeon-beast-head.png);
+		}
+		#sec_4 .beast-blood{
+			position: absolute;
+			width: 316px;
+			height: 161px;
+			margin: auto 50%;
+			left: -40px;
+			top: 270px;
+			background: url(img/dungeon-beast-blood.png);
+		}
+		#sec_4 .hero{
+			position: absolute;
+			width: 266px;
+			height: 278px;
+			margin: auto 50%;
+			left: -267px;
+			top: 370px;
+			background: url(img/dungeon-hero.png);
+		}
+		#sec_4 .grass{
+			position: absolute;
+			width: 374px;
+			height: 65px;
+			margin: auto 50%;
+			left: -317px;
+			top: 585px;
+			background: url(img/dungeon-grass.png);
+		}
+	
+	</style>
+	<section id="sec_4">
+		<div class="bg"></div>
+		<div class="slate"></div>
+		<div class="thumbnails"></div>	
+		<div class="frame"></div>
+		<div class="beast"></div>
+		<div class="beast-blood"></div>
+		<div class="beast-head"></div>
+		<div class="hero"></div>
+		<div class="grass"></div>
+	</section>
+	<section id="sec_5">
+
+	</section>
+	<section id="sec_6">
+
+	</section>
+
+	<script type="text/javascript" src="js/libs/jquery-1.9.0.js"></script>
+	<script type="text/javascript" src="js/libs/TweenMax.min.js"></script>
+	<script type="text/javascript" src="js/src/renderfarm2.js"></script>
+
+	<script>
+	
+		function TimelineInterface(timeline){
+			
+			//timeline
+			var tl = timeline,
+			currSeek = 0,
+			tarSeek = 0;
+			
+			//render me some frames
+			this.render = function(offset){
+				/*
+					This version of the renderfarm gives us a value from -1 to 1 based on the height of the container. And
+					how far it has been scrolled. When the container is exactly centered the value is 0.
+					
+					Take that value and convert it to a decimal percentage between 0 to 1 where 0 is 0% and 1 is 100%
+					
+					Take that percentage value and step 1/5th of the way there each render(). This softens the animation.
+					
+					seek to the position in the timeline using the totalDuration * the percentage value by finding the exact
+					timecode you'd need to seek to in order to be that far through the animation.
+
+					That means that you can create animations as long as you want and they'll be controlled just the same.
+					So go sick.
+				*/
+				tarSeek = Mathutils.map(offset, -1, 1, 0, 1);
+				currSeek += (tarSeek - currSeek) / 5;
+				tl.seek(tl.totalDuration() * currSeek);
+			}
+				
+		}
+	
+	
+	
+		jQuery(function($) {
+
+            
+            
+            //Timeline example: Build a timeline, control it with piggy
+           		
+           		//create timeline
+	    		var tl_example = new TimelineLite();
+	    		
+	    		//linear easing is best 
+	    		TweenLite.defaultEase = Linear.easeNone;
+	    		var head = new TweenLite.to($('.beast-head', '#sec_4'), 10, {x: 80, y:120, rotationZ: -15});
+				var beast = new TweenLite.to($('.beast', '#sec_4'), 10, {x:100});
+				var blood = new TweenLite.from($('.beast-blood', '#sec_4'), 1, {delay:5, width: 1});
+				var bloodMove = new TweenLite.to($('.beast-blood', '#sec_4'), 10, {x:100});
+				var hero = new TweenLite.to($('.hero', '#sec_4'), 10, {x:-100});
+				var grass = new TweenLite.to($('.grass', '#sec_4'), 10, {x:-180});
+				var frame = new TweenLite.to($('.frame', '#sec_4'), 10, {x:80});
+				var thumbnails = new TweenLite.to($('.thumbnails', '#sec_4'), 10, {x:130});
+				
+				//add tweens to timeline and pause them.
+				tl_example.add( [head, beast, blood, bloodMove, hero, grass, frame, thumbnails] );
+				tl_example.pause();
+	    		
+	    		$("#sec_4").piggy(new TimelineInterface(tl_example));
+	   		
+	   		//That's it... Honest.
+
+
+        });
+	</script>
+
+</body>
+
+</html>
