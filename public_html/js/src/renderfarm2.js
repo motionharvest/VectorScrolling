@@ -168,10 +168,10 @@
                         offBottom = (r_bottom > _top);
                         $self.removeClass("active");
                         if (options.hasOwnProperty("scroll")) {
-                            options.scroll((offBottom) ? 0 : 1);
+                            options.scroll((offBottom) ? -1 : 1);
                         }
                         if (options.hasOwnProperty("render")) {
-                            options.render((offBottom) ? 0 : 1);
+                            options.render((offBottom) ? -1 : 1);
                             _rAF.kill();
 
                         }
