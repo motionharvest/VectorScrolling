@@ -36,6 +36,6 @@ When the element is exactly centered on the screen, offset is 0
 
 When the element is exactly centered on the screen, offset is 0
 
-I have a demo inside `public_html` showing how to control a Greensock TimelineLite animation with this new implementation.
+There is a demo included showing how to control a Greensock TimelineLite animation with this new implementation. Everything else should be easy to figure out for yourself.
 
 Enjoy animating everything!
