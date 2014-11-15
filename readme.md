@@ -27,12 +27,20 @@ That's it. Nothing hard. Just target an element, and give it instructions for th
 #### scroll ####
 `scroll` is triggered when the element is on the screen and the user scrolls. A value between -1 and 1 is passed to indicate how much of the element is on the screen.
 
-When the element is exactly centered on the screen, offset is 0 
+When the element is exactly centered on the screen, offset is 0.
+
+When the element is completely below the screen, offset is -1
+
+When the element is completely above the screen, offset is 1.
 
 #### render ####
 `render` is triggered when the element is on the screen using requestAnimationFrame. A value between -1 and 1 is passed to indicate how much of the element is on the screen.
 
 When the element is exactly centered on the screen, offset is 0
+
+When the element is completely below the screen, offset is -1
+
+When the element is completely above the screen, offset is 1.
 
 There is a demo included showing how to control a Greensock TimelineLite animation with this new implementation. Everything else should be easy to figure out for yourself.
 
