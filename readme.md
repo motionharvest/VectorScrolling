@@ -1,8 +1,6 @@
-Performant-Scrolling-Construct
+RenderFarm
 ==============================
 
-
-#### JavaScript Scrolling Construct ####
 Completely re-done.
 
 Simple to use interface.
