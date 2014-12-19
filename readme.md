@@ -39,3 +39,11 @@ When the element is exactly centered on the screen, offset is 0
 There is a demo included showing how to control a Greensock TimelineLite animation with this new implementation. Everything else should be easy to figure out for yourself.
 
 Enjoy animating everything!
+
+
+UPDATE
+#### inside or outside ####
+You can pass a boolean as a second parameter to the piggy function to tell RenderFarm if you want to track the element ONLY when it is fully inside the window.
+
+TODO
+need to recalculate some stuff when you resize, but that shouldn't be too hard. 
