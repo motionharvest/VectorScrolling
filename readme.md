@@ -14,7 +14,7 @@ Simple to use interface.
 		},
 		render: function(offset){
 		}
-    });
+    }, true);
 
 That's it. Nothing hard. Just target an element, and give it instructions for the cases that fit your needs.
 
