@@ -76,7 +76,8 @@
 
         //options this element has
         return {
-            kill: function() {
+            kill: function(val) {
+                callback(val);
                 killswitch = true;
             },
             run: function() {
@@ -175,9 +176,7 @@
                             options.scroll((offBottom) ? -1 : 1);
                         }
                         if (options.hasOwnProperty("render")) {
-                            options.render((offBottom) ? -1 : 1);
-                            _rAF.kill();
-
+                            _rAF.kill((offBottom) ? -1 : 1);
                         }
                         if (options.hasOwnProperty("blur")) {
                             options.blur(offBottom);
