@@ -46,4 +46,11 @@ There is a demo included showing how to control a Greensock TimelineLite animati
 
 Enjoy animating everything!
 
-http://codepen.io/cmndo/pen/PwoRyx
+
+UPDATE
+#### inside or outside ####
+You can pass a boolean as a second parameter to the piggy function to tell RenderFarm if you want to track the element ONLY when it is fully inside the window.
+
+TODO
+need to recalculate some stuff when you resize, but that shouldn't be too hard.
+
