@@ -57,7 +57,7 @@
     })();
 
     //RAF wrapper
-    function RenderFrameInstance(callback, pauseStart) {
+    function RenderFrameInstance(callback, autoPlay) {
         var killswitch = false;
 
         //loop
@@ -69,8 +69,8 @@
                 requestAnimFrame(animloop);
                 callback();
             }
-            // if no second argument OR pauseStart is false, loop
-        if (!pauseStart) {
+            // if no second argument OR autoPlay is true, loop
+        if (autoPlay === undefined || autoPlay === true) {
             animloop();
         }
 
@@ -95,15 +95,16 @@
     });
 
 
-    $.fn.piggy = function(options) {
+    $.fn.piggy = function(options, inner) {
 
         $(this).each(function() {
 
             //scrolling variables
-            var _top,
-                _bottom,
-                _middle,
-                _rAF;
+            var _top = $win.scrollTop(),
+                _bottom = _top + winHeight,
+                _middle = _top + (winHeight / 2),
+                _rAF,
+                containerOffset;
 
             //self variables
             var $self = $(this),
@@ -122,6 +123,8 @@
             //where we are
             r_top = $self.offset().top;
             r_height = $self.height();
+            containerOffset = (inner === true) ? r_height : 0;
+
             r_bottom = r_top + r_height;
             r_middle = r_top + (r_bottom - r_top) * .5;
 
@@ -129,10 +132,10 @@
             if (options.hasOwnProperty("render")) {
                 _rAF = new RenderFrameInstance(function() {
                     _groupOffset = _middle - r_middle;
-                    _tmp = (winHeight / 2) + (r_height / 2);
+                    _tmp = ((winHeight / 2) + (r_height / 2)) - containerOffset;
                     _standardized = Mathutils.map(_groupOffset, -_tmp, _tmp, -1, 1);
                     options.render(_standardized);
-                }, true);
+                }, false);
             }
 
 
@@ -144,7 +147,7 @@
                 _middle = _top + (winHeight / 2);
 
                 //check if this element is in the zone
-                if (r_top < _bottom && r_bottom > _top) {
+                if (r_top < _bottom - containerOffset && r_bottom > _top + containerOffset) {
 
                     if (!$self.hasClass("active")) {
                         $self.addClass("active")
@@ -157,7 +160,8 @@
                         }
                     }
                     _groupOffset = _middle - r_middle;
-                    _tmp = (winHeight / 2) + (r_height / 2);
+                    _tmp = ((winHeight / 2) + (r_height / 2)) - containerOffset;
+
                     _standardized = Mathutils.map(_groupOffset, -_tmp, _tmp, -1, 1);
                     if (options.hasOwnProperty("scroll")) {
                         options.scroll(_standardized);
@@ -165,7 +169,7 @@
 
                 } else {
                     if ($self.hasClass("active")) {
-                        offBottom = (r_bottom > _top);
+                        offBottom = (r_bottom > _top + containerOffset);
                         $self.removeClass("active");
                         if (options.hasOwnProperty("scroll")) {
                             options.scroll((offBottom) ? -1 : 1);
