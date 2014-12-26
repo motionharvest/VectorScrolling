@@ -161,7 +161,7 @@
 			tarSeek = 0;
 			
 			//render me some frames
-			this.scroll = function(offset){
+			this.render = function(offset){
 				/*
 					This version of the renderfarm gives us a value from -1 to 1 based on the height of the container. And
 					how far it has been scrolled. When the container is exactly centered the value is 0.
@@ -178,7 +178,7 @@
 				*/
 				tarSeek = Mathutils.map(offset, -1, 1, 0, 1);
 				currSeek += (tarSeek - currSeek) / 5;
-				tl.seek(tl.totalDuration() * tarSeek);
+				tl.seek(tl.totalDuration() * currSeek);
 
 			}
 				
