@@ -21,7 +21,6 @@
 			return this.interpolate(this.normalize($value, $min1, $max1), $min2, $max2);
 		}
 	};
-	Mathutils.map(1,0,1,0,100);
 
 	window.requestAnimFrame = (function () {
 		return window.requestAnimationFrame ||
@@ -103,9 +102,9 @@
 			var $tmpPiggy = $(this),
 				pTop,
 				pHeight,
-				pBottom,
 				pWhenStart,
-				pWhenEnd;
+				pWhenEnd,
+				active = false;
 
 			//lets keep 'em handy
 			piggies.push($tmpPiggy);
@@ -135,19 +134,46 @@
 			onResizeCallbacks.push(function(){
 				pTop = $tmpPiggy.offset().top;
 				pHeight = $tmpPiggy.height();
-				pBottom = pTop + pHeight;
 				pWhenStart = pTop + (pHeight * options.start.when);
 				pWhenEnd = pTop + (pHeight * options.end.when);
 			});
 
 			//I need to know what the breakpoints are
 			onScrollCallbacks.push(function () {
+
 				//check if we're inside the window start and end.
-				if(pWhenStart < wTop + (wHeight * options.start.is) && pWhenEnd > wTop + (wHeight * options.end.is)){
-					console.log("act");
-				}else{
-					console.log("deact");
+				if(pWhenStart < wTop + (wHeight * options.start.is)
+					&& pWhenEnd > wTop + (wHeight * options.end.is)
+					&& !active){
+
+					//call once if we haven't activated yet, and call() exists
+					if(options.start.hasOwnProperty("call") && !active){
+						options.start.call();
+					}
+					active = true;
+
+
+				}else if((pWhenStart > wTop + (wHeight * options.start.is)
+					|| pWhenEnd < wTop + (wHeight * options.end.is))
+					&& active){
+
+					//nice - deactivate
+					active = false;
+					if(options.end.hasOwnProperty("call")){
+						options.end.call();
+					}
+
 				}
+
+				//If a scroll is active I'd like to know how far through it is.
+				if(active){
+					var track1 = wTop + (wHeight * options.start.is) - pWhenStart;
+					var track2 = pWhenEnd - (wTop + (wHeight * options.end.is));
+
+					console.log(Mathutils.map(track1, 0, track1 + track2, 0, 1));
+				}
+
+
 			});
 
 
