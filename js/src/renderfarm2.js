@@ -1,192 +1,159 @@
 /**
- * Copyright (c) 2014 Aaron Sherrill
- * http://www.digitalsurgeons.com
- * Made with love by Digital Surgeons
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in
- * all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- * THE SOFTWARE.
+ * In this version I'm trying to be more flexible
  */
- 
- //mathutils
- var Mathutils = {
-     normalize: function($value, $min, $max) {
-         return ($value - $min) / ($max - $min);
-     },
-     interpolate: function($normValue, $min, $max) {
-         return $min + ($max - $min) * $normValue;
-     },
-     map: function($value, $min1, $max1, $min2, $max2) {
-         if ($value < $min1) {
-             $value = $min1;
-         }
-         if ($value > $max1) {
-             $value = $max1;
-         }
-         var res = this.interpolate(this.normalize($value, $min1, $max1), $min2, $max2);
+(function () {
 
-         return res;
-     }
- };
- 
-//functionality concept
-(function() {
-    window.requestAnimFrame = (function() {
-        return window.requestAnimationFrame ||
-            window.webkitRequestAnimationFrame ||
-            window.mozRequestAnimationFrame ||
-            window.oRequestAnimationFrame ||
-            window.msRequestAnimationFrame ||
-            function(callback) {
-                window.setTimeout(callback, 1000 / 60);
-            };
-    })();
+	var Mathutils = {
+		normalize: function ($value, $min, $max) {
+			return ($value - $min) / ($max - $min);
+		},
+		interpolate: function ($normValue, $min, $max) {
+			return $min + ($max - $min) * $normValue;
+		},
+		map: function ($value, $min1, $max1, $min2, $max2) {
+			if ($value < $min1) {
+				$value = $min1;
+			}
+			if ($value > $max1) {
+				$value = $max1;
+			}
 
-    //RAF wrapper
-    function RenderFrameInstance(callback, autoPlay) {
-        var killswitch = false;
+			return this.interpolate(this.normalize($value, $min1, $max1), $min2, $max2);
+		}
+	};
+	Mathutils.map(1,0,1,0,100);
 
-        //loop
-        function animloop() {
-                if (killswitch) {
-                    killswitch = false;
-                    return;
-                }
-                requestAnimFrame(animloop);
-                callback();
-            }
-            // if no second argument OR autoPlay is true, loop
-        if (autoPlay === undefined || autoPlay === true) {
-            animloop();
-        }
+	window.requestAnimFrame = (function () {
+		return window.requestAnimationFrame ||
+			window.webkitRequestAnimationFrame ||
+			window.mozRequestAnimationFrame ||
+			window.oRequestAnimationFrame ||
+			window.msRequestAnimationFrame ||
+			function (callback) {
+				window.setTimeout(callback, 1000 / 60);
+			};
+	})();
 
-        //options this element has
-        return {
-            kill: function(val) {
-                callback(val);
-                killswitch = true;
-            },
-            run: function() {
-                animloop();
-            }
-        };
-    }
+	//RAF wrapper
+	function RenderFrameInstance(callback, autoPlay) {
+		var killswitch = false;
 
-   
+		//loop
+		function animloop() {
+			if (killswitch) {
+				killswitch = false;
+				return;
+			}
+			requestAnimFrame(animloop);
+			callback();
+		}
 
-    var $win = $(window),
-        winHeight = $win.height();
+		if (autoPlay === undefined || autoPlay === true) {
+			animloop();
+		}
 
-    $win.resize(function() {
-        winHeight = $win.height();
-    });
+		//options this element has
+		return {
+			kill: function (val) {
+				callback(val);
+				killswitch = true;
+			},
+			run: function () {
+				animloop();
+			}
+		};
+	}
+
+	//window control and window height
+	var $win = $(window),
+		wHeight = $win.height(),
+		wBottom,
+		wTop,
+		piggies = [],
+		onScrollCallbacks = [],
+		onResizeCallbacks = [],
+		i;
+
+	//set winHeight on resize
+	$win.resize(function () {
+		wHeight = $win.height();
+		wTop = $win.scrollTop();
+		wBottom = wTop + wHeight;
+		for (i = 0; i < onResizeCallbacks.length; i++) {
+			onResizeCallbacks[i]();
+		}
+	});
+
+	//set scrolltop on scroll
+	$win.scroll(function () {
+		wTop = $win.scrollTop();
+		wBottom = wTop + wHeight;
+		for (i = 0; i < onScrollCallbacks.length; i++) {
+			onScrollCallbacks[i]();
+		}
+	});
+
+	//yup, its officially a jQuery extension
+	$.fn.piggy = function (options) {
+
+		//loop through matching selectors
+		$(this).each(function () {
+
+			//piggy position
+			var $tmpPiggy = $(this),
+				pTop,
+				pHeight,
+				pBottom,
+				pWhenStart,
+				pWhenEnd;
+
+			//lets keep 'em handy
+			piggies.push($tmpPiggy);
+
+			//I need to make sure I have a start and an end.
+			if (!options.hasOwnProperty("start") || !options.hasOwnProperty("end")) {
+				console.warn("Must supply start:{} and end:{} objects. Look at the example in the documentation for details.");
+				return;
+			}
+
+			//A little house keeping is necessary. percentages need to be decimals
+			if(options.start.when.indexOf("%") !== -1){
+				options.start.when = Number(options.start.when.split("%")[0]) / 100;
+			}
+			if(options.start.is.indexOf("%") !== -1){
+				options.start.is = Number(options.start.is.split("%")[0]) / 100;
+			}
+			if(options.end.when.indexOf("%") !== -1){
+				options.end.when = Number(options.end.when.split("%")[0]) / 100;
+			}
+			if(options.end.is.indexOf("%") !== -1){
+				options.end.is = Number(options.end.is.split("%")[0]) / 100;
+			}
 
 
-    $.fn.piggy = function(options, inner) {
+			//Begin with knowing values dependant on sizing
+			onResizeCallbacks.push(function(){
+				pTop = $tmpPiggy.offset().top;
+				pHeight = $tmpPiggy.height();
+				pBottom = pTop + pHeight;
+				pWhenStart = pTop + (pHeight * options.start.when);
+				pWhenEnd = pTop + (pHeight * options.end.when);
+			});
 
-        $(this).each(function() {
-
-            //scrolling variables
-            var _top = $win.scrollTop(),
-                _bottom = _top + winHeight,
-                _middle = _top + (winHeight / 2),
-                _rAF,
-                containerOffset;
-
-            //self variables
-            var $self = $(this),
-                r_top,
-                r_bottom,
-                r_middle,
-                r_active,
-                r_height;
-
-            //positioning variables
-            var _groupOffset,
-                _tmp,
-                _standardized,
-                offBottom;
-
-            //where we are
-            r_top = $self.offset().top;
-            r_height = $self.height();
-            containerOffset = (inner === true) ? r_height : 0;
-
-            r_bottom = r_top + r_height;
-            r_middle = r_top + (r_bottom - r_top) * .5;
+			//I need to know what the breakpoints are
+			onScrollCallbacks.push(function () {
+				//check if we're inside the window start and end.
+				if(pWhenStart < wTop + (wHeight * options.start.is) && pWhenEnd > wTop + (wHeight * options.end.is)){
+					console.log("act");
+				}else{
+					console.log("deact");
+				}
+			});
 
 
-            if (options.hasOwnProperty("render")) {
-                _rAF = new RenderFrameInstance(function() {
-                    _groupOffset = _middle - r_middle;
-                    _tmp = ((winHeight / 2) + (r_height / 2)) - containerOffset;
-                    _standardized = Mathutils.map(_groupOffset, -_tmp, _tmp, -1, 1);
-                    options.render(_standardized);
-                }, false);
-            }
+		});
 
-
-            $win.scroll(function(e) {
-
-                //grab some window stuff
-                _top = $win.scrollTop();
-                _bottom = _top + winHeight;
-                _middle = _top + (winHeight / 2);
-
-                //check if this element is in the zone
-                if (r_top < _bottom - containerOffset && r_bottom > _top + containerOffset) {
-
-                    if (!$self.hasClass("active")) {
-                        $self.addClass("active")
-                        if (options.hasOwnProperty("focus")) {
-                            options.focus();
-
-                        }
-                        if (options.hasOwnProperty("render")) {
-                            _rAF.run();
-                        }
-                    }
-                    _groupOffset = _middle - r_middle;
-                    _tmp = ((winHeight / 2) + (r_height / 2)) - containerOffset;
-
-                    _standardized = Mathutils.map(_groupOffset, -_tmp, _tmp, -1, 1);
-                    if (options.hasOwnProperty("scroll")) {
-                        options.scroll(_standardized);
-                    }
-
-                } else {
-                    if ($self.hasClass("active")) {
-                        offBottom = (r_bottom > _top + containerOffset);
-                        $self.removeClass("active");
-                        if (options.hasOwnProperty("scroll")) {
-                            options.scroll((offBottom) ? -1 : 1);
-                        }
-                        if (options.hasOwnProperty("render")) {
-                            _rAF.kill((offBottom) ? -1 : 1);
-                        }
-                        if (options.hasOwnProperty("blur")) {
-                            options.blur(offBottom);
-                        }
-                    }
-                }
-
-            }).scroll();
-
-        });
-
-    };
+		//run a resize command to calculate values
+		$win.resize();
+	};
 })();

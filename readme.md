@@ -1,28 +1,70 @@
-RenderFarm
+RenderFarm v3
 ==============================
+It has been determined that there are 6 conditions for start positions and end positions from which elements can animate from and to.
 
-Completely re-done.
+DOM elements heights are looked at in percentages. Each DOM element is 100% tall.
 
-Simple to use interface.
+The screen is also seen as a percentage. No matter the window size, it is considered 100% tall. With that in mind, the "TOP" is 0% and the "BOTTOM" is 100%.
 
-    $('.className').piggy({
- 		focus: function(){
-        },
-		blur: function(offBottom){
+
+The 6 Element Positions
+---
+Each element you target will have a point which activates it, and another point which deactivates it. They are described as: Activate/Deactivate when `what percentage of the element's height` is `less than what percentage of the screen's height`.
+
+ 1. Activate when 0% is at 100%, deactivate when 100% is at 0%.
+ 2. Activate when 100% is at 100%, deactivate when 0% is at 0%.
+ 3. Activate when 0% is at 0%, deactivate when 100% is at 100%.
+ 4. Activate when 0% is at 0%, deactivate when 100% is at 0%.
+ 5. Activate when 0% is at 100%, deactivate when 100% is at 100%.
+ 6. Activate when x% is at x%, deactivate when x% is at x%
+
+![](img/howtofarm.jpg)
+
+This needs some labeling, but gives you the idea. #6 is from anywhere to anywhere.
+
+Here is how you use it.
+--
+
+The long form configuration looks like this.
+
+    $('#selector').piggy({
+		act: {
+			when: "0%",
+			is: "100%",
+			vals: {
+				x: 0
+			},
+			call: function(){
+			}
 		},
-		scroll: function(offset){
+		deact: {
+			when: "100%",
+			at: "0%",
+			vals: {
+				x: 50
+			},
+			call: function(offtop){
+			}
 		},
-		render: function(offset){
+		render: function(vals){
 		}
-    }, true);
+    });
 
-That's it. Nothing hard. Just target an element, and give it instructions for the cases that fit your needs.
+The shorthand looks like this
 
-#### focus ####
-`focus` is triggered when the element appears on the screen
+	$('#selector').piggy(1, startvals, endvals, render);
 
-#### blur ####
-`blur` is triggered when the element is scrolled off the screen. A boolean is passed to indicate if the element has been scrolled off the bottom.
+select your element. specify the points that activate/deactivate, values to track from place to place, and which tracking method you want to use.
+
+#### activate ####
+`act` is triggered when the element is less than the first boundary
+
+#### deactivate ####
+`deact` is triggered when the element is scrolled back below the first boundary or above the second boundary. A boolean is passed to indicate if the element has been scrolled off the top of the boundary.
+
+
+----------------------
+
 
 #### scroll ####
 `scroll` is triggered when the element is on the screen and the user scrolls. A value between -1 and 1 is passed to indicate how much of the element is on the screen.
