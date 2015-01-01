@@ -152,24 +152,9 @@
 	<script type="text/javascript" src="js/src/renderfarm2.js"></script>
 
 	<script>
-	
-		function TimelineInterface(timeline){
-			
-			//timeline
-			var tl = timeline,
-			currSeek = 0,
-			tarSeek = 0;
-			
-			//render me some frames
-			this.render = function(offset){
 
-				tarSeek = Mathutils.map(offset, -1, 1, 0, 1);
-				currSeek += (tarSeek - currSeek) / 5;
-				tl.seek(tl.totalDuration() * currSeek);
-
-			}
-				
-		}
+		//temporary
+		var currSeek = 0;
 	
 	
 	
@@ -201,31 +186,37 @@
 			
 			$('#sec_4').piggy({
 			    start: {
-			        when: "50%",
-			        is: "50%",
+			        when: "100%",
+			        is: "100%",
 			        vals: {
 			            time: 0
 			        },
 			        call: function(){
-			       		console.log("start for #sec_4 called");
+			       		//console.log("start for #sec_4 called");
 			        }
 			    },
 			    end: {
-			        when: "50%",
+			        when: "0%",
 					is: "0%",
 			        vals: {
 			            time: 1
 			        },
 			        call: function(offtop){
-			        	console.log("end for #sec_4 called");
+			        	//console.log("end for #sec_4 called");
 			        }
 			    },
-			    render: function(vals){			    	
-			    	console.log("rendering #sec_4: ", vals);
-			    },
+			    render: function(vals){
+					//vals.time = vals.time || 0;
+
+					currSeek += (vals.time - currSeek) / 5;
+
+					tl_example.seek(tl_example.totalDuration() * currSeek);
+			    }
+			    /*,
 			    scroll: function(vals){
 					tl_example.seek(tl_example.totalDuration() * vals.time);
 			    }
+			    */
 			});
     		
     		

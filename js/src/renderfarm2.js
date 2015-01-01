@@ -119,7 +119,8 @@
 				active = false,
 				track1,
 				track2,
-				trackPerc;
+				trackPerc=0,
+				rAF;
 
 			//lets keep 'em handy
 			piggies.push($tmpPiggy);
@@ -153,6 +154,16 @@
 				pWhenEnd = pTop + (pHeight * options.end.when);
 			});
 
+			if(options.hasOwnProperty("render")){
+				rAF = new RenderFrameInstance(function() {
+					if(options.start.hasOwnProperty("vals") && options.end.hasOwnProperty("vals")){
+						options.render(equalize(trackPerc, options.start.vals, options.end.vals));
+					}else{
+						options.render({offset:trackPerc});
+					}
+				}, false);
+			}
+
 			//I need to know what the breakpoints are
 			onScrollCallbacks.push(function () {
 
@@ -167,6 +178,10 @@
 					}
 					active = true;
 
+					if(options.hasOwnProperty("render")){
+						rAF.run();
+					}
+
 
 				}else if((pWhenStart > wTop + (wHeight * options.start.is)
 					|| pWhenEnd < wTop + (wHeight * options.end.is))
@@ -176,6 +191,9 @@
 					active = false;
 					if(options.end.hasOwnProperty("call")){
 						options.end.call();
+					}
+					if(options.hasOwnProperty("render")){
+						rAF.kill();
 					}
 
 					//when deactivating, check if its off the bottom, or off the top, and force a scroll call
@@ -219,6 +237,8 @@
 				}
 
 			});
+
+
 
 
 		});
