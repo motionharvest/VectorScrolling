@@ -71,7 +71,8 @@
 		piggies = [],
 		onScrollCallbacks = [],
 		onResizeCallbacks = [],
-		i;
+		i,
+		tmpVals;
 
 	//set winHeight on resize
 	$win.resize(function () {
@@ -81,6 +82,7 @@
 		for (i = 0; i < onResizeCallbacks.length; i++) {
 			onResizeCallbacks[i]();
 		}
+		$win.scroll();
 	});
 
 	//set scrolltop on scroll
@@ -91,6 +93,16 @@
 			onScrollCallbacks[i]();
 		}
 	});
+
+
+	function equalize(perc, from, to){
+		tmpVals = {};
+		for (i in from){
+			tmpVals[i] = Mathutils.map(perc, 0, 1, from[i], to[i]);
+		}
+		return tmpVals;
+	}
+
 
 	//yup, its officially a jQuery extension
 	$.fn.piggy = function (options) {
@@ -104,7 +116,10 @@
 				pHeight,
 				pWhenStart,
 				pWhenEnd,
-				active = false;
+				active = false,
+				track1,
+				track2,
+				trackPerc;
 
 			//lets keep 'em handy
 			piggies.push($tmpPiggy);
@@ -163,16 +178,45 @@
 						options.end.call();
 					}
 
+					//when deactivating, check if its off the bottom, or off the top, and force a scroll call
+					if((pWhenEnd > wTop + (wHeight * options.end.is))){
+						//off bottom
+						//if we have values to check, equalize the values proportionally to trackPerc
+						if(options.hasOwnProperty("scroll")){
+							if(options.start.hasOwnProperty("vals") && options.end.hasOwnProperty("vals")){
+								options.scroll(options.start.vals);
+							}else{
+								options.scroll(0);
+							}
+						}
+
+					}else{
+						if(options.hasOwnProperty("scroll")){
+							if(options.start.hasOwnProperty("vals") && options.end.hasOwnProperty("vals")){
+								options.scroll(options.end.vals);
+							}else{
+								options.scroll(1);
+							}
+						}
+					}
 				}
 
 				//If a scroll is active I'd like to know how far through it is.
 				if(active){
-					var track1 = wTop + (wHeight * options.start.is) - pWhenStart;
-					var track2 = pWhenEnd - (wTop + (wHeight * options.end.is));
+					track1 = wTop + (wHeight * options.start.is) - pWhenStart;
+					track2 = pWhenEnd - (wTop + (wHeight * options.end.is));
+					trackPerc = Mathutils.map(track1, 0, track1 + track2, 0, 1);
 
-					console.log(Mathutils.map(track1, 0, track1 + track2, 0, 1));
+
+					//if we have values to check, equalize the values proportionally to trackPerc
+					if(options.hasOwnProperty("scroll")){
+						if(options.start.hasOwnProperty("vals") && options.end.hasOwnProperty("vals")){
+							options.scroll(equalize(trackPerc, options.start.vals, options.end.vals));
+						}else{
+							options.scroll({offset:trackPerc});
+						}
+					}
 				}
-
 
 			});
 

@@ -201,8 +201,8 @@
 			
 			$('#sec_4').piggy({
 			    start: {
-			        when: "100%",
-			        is: "100%",
+			        when: "50%",
+			        is: "50%",
 			        vals: {
 			            time: 0
 			        },
@@ -211,7 +211,7 @@
 			        }
 			    },
 			    end: {
-			        when: "100%",
+			        when: "50%",
 					is: "0%",
 			        vals: {
 			            time: 1
@@ -224,7 +224,7 @@
 			    	console.log("rendering #sec_4: ", vals);
 			    },
 			    scroll: function(vals){
-			    	console.log("scrolling #sec_4: ", vals);
+					tl_example.seek(tl_example.totalDuration() * vals.time);
 			    }
 			});
     		
