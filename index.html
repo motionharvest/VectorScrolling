@@ -189,8 +189,7 @@
 			        when: "0%",
 			        is: "50%",
 			        vals: {
-			            time: 0,
-			            adam: 30
+			            time: 0
 			        },
 			        call: function(){
 			       		//console.log("start for #sec_4 called");
@@ -200,15 +199,13 @@
 			        when: "100%",
 					is: "0%",
 			        vals: {
-			            time: 1,
-			            adam: 34
+			            time: 1
 			        },
 			        call: function(offtop){
 			        	//console.log("end for #sec_4 called");
 			        }
 			    },
 			    scroll: function(vals){
-			    	console.log(vals.adam);
 					tl_example.seek(tl_example.totalDuration() * vals.time);
 			    }
 			    
