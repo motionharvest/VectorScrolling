@@ -186,8 +186,8 @@
 			
 			$('#sec_4').piggy({
 			    start: {
-			        when: "100%",
-			        is: "100%",
+			        when: "0%",
+			        is: "50%",
 			        vals: {
 			            time: 0
 			        },
@@ -205,18 +205,10 @@
 			        	//console.log("end for #sec_4 called");
 			        }
 			    },
-			    render: function(vals){
-					//vals.time = vals.time || 0;
-
-					currSeek += (vals.time - currSeek) / 5;
-
-					tl_example.seek(tl_example.totalDuration() * currSeek);
-			    }
-			    /*,
 			    scroll: function(vals){
 					tl_example.seek(tl_example.totalDuration() * vals.time);
 			    }
-			    */
+			    
 			});
     		
     		
