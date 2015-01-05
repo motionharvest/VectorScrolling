@@ -28,7 +28,7 @@ Here is how you use it.
 The long form configuration looks like this.
 
     $('#selector').piggy({
-		act: {
+		start: {
 			when: "0%",
 			is: "100%",
 			vals: {
@@ -37,7 +37,7 @@ The long form configuration looks like this.
 			call: function(){
 			}
 		},
-		deact: {
+		end: {
 			when: "100%",
 			at: "0%",
 			vals: {
@@ -46,24 +46,22 @@ The long form configuration looks like this.
 			call: function(offtop){
 			}
 		},
-		render: function(vals){
+		scroll: function(vals){
 		}
     });
 
-The shorthand looks like this
 
-	$('#selector').piggy(1, startvals, endvals, render);
 
-select your element. specify the points that activate/deactivate, values to track from place to place, and which tracking method you want to use.
+Select your element. specify the points that activate/deactivate, values to track from place to place, and which tracking method you want to use.
 
 #### activate ####
-`act` is triggered when the element is less than the first boundary
+`start` is triggered when the element is less than the first boundary
 
 #### deactivate ####
-`deact` is triggered when the element is scrolled back below the first boundary or above the second boundary. A boolean is passed to indicate if the element has been scrolled off the top of the boundary.
+`end` is triggered when the element is scrolled back below the first boundary or above the second boundary. A boolean is passed to indicate if the element has been scrolled off the top of the boundary.
 
 
-----------------------
+---------------------- TODO - FINISH DOCUMENTATION
 
 
 #### scroll ####
