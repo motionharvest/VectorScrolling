@@ -60,12 +60,8 @@ Select your element. specify the points that activate/deactivate, values to trac
 #### deactivate ####
 `end` is triggered when the element is scrolled back below the first boundary or above the second boundary. A boolean is passed to indicate if the element has been scrolled off the top of the boundary.
 
-
----------------------- TODO - FINISH DOCUMENTATION
-
-
 #### scroll ####
-`scroll` is triggered when the element is on the screen and the user scrolls. A value between -1 and 1 is passed to indicate how much of the element is on the screen.
+`scroll` is triggered when the element is on the screen and the user scrolls. An object is passed as an argument to the `scroll` method containing any properties you've specified inside of `start.vals` and `end.vals` as calculated to the  proportion of the distance between their values depending on the percentage of where your element is between the `start` and `end` values.
 
 When the element is exactly centered on the screen, offset is 0.
 
