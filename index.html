@@ -148,7 +148,7 @@
 				top: 585px;
 				background: url(img/dungeon-grass.png);
 			}
-		
+
 		</style>
 </head>
 
@@ -162,7 +162,7 @@
 			<section id="sec_4">
 				<div class="bg"></div>
 				<div class="slate"></div>
-				<div class="thumbnails"></div>	
+				<div class="thumbnails"></div>
 				<div class="frame"></div>
 				<div class="beast"></div>
 				<div class="beast-blood"></div>
@@ -178,7 +178,7 @@
 	<script type="text/javascript" src="js/libs/jquery-1.9.0.js"></script>
 	<script type="text/javascript" src="js/libs/iscroll-probe.js"></script>
 	<script type="text/javascript" src="js/libs/TweenMax.min.js"></script>
-	<script type="text/javascript" src="js/src/renderfarm2.js"></script>
+	<script type="text/javascript" src="js/src/renderfarm.js"></script>
 
 	<script>
 
@@ -190,17 +190,17 @@
 			mouseWheel: true,
     		scrollbars: true
 		});
-			
+
 
 
 		/*
 			Build out the animation we'll be testing (Uses GSAP's TimelineLite)
 		*/
 		var tl_example = new TimelineLite();
-		
-		//linear easing is best 
+
+		//linear easing is best
 		TweenLite.defaultEase = Linear.easeNone;
-		
+
 		//construct each transition in the sequence. as if each sequence is 10 seconds long, 1 second is 10% of the total animation length. makes it a little easier to visualize.
 		var head = 			new TweenLite.to($('.beast-head', '#sec_4'), 10, {x: 80, y:120, rotationZ: -15});
 		var beast =			new TweenLite.to($('.beast', '#sec_4'), 10, {x:100});
@@ -210,7 +210,7 @@
 		var grass = 		new TweenLite.to($('.grass', '#sec_4'), 10, {x:-180});
 		var frame = 		new TweenLite.to($('.frame', '#sec_4'), 10, {x:80});
 		var thumbnails = 	new TweenLite.to($('.thumbnails', '#sec_4'), 10, {x:130});
-		
+
 		//add tweens to timeline and pause them.
 		tl_example.add( [head, beast, blood, bloodMove, hero, grass, frame, thumbnails] );
 		tl_example.pause();
@@ -245,7 +245,7 @@
 		    }
 		});
 
-		
+
 	</script>
 
 </body>
