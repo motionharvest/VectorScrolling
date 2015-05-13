@@ -34,13 +34,13 @@ Here is how you use it.
 		end: {
 			when: "100%",
 			at: "0%",
-			call: function(offtop){
+			call: function(){
 			}
 		}
     });
 
 
-Select your element. specify the points that activate and deactivate it, values to track from place to place, and which tracking method you want to use.
+Select your element, specify the points that activate and deactivate it, and use the `call` method to take action on it.
 
 #### activate ####
 `start` is triggered when the element is less than the first boundary
@@ -77,7 +77,6 @@ You can pass a boolean as a second parameter to the piggy function to tell Rende
 
 TODO
 need to recalculate some stuff when you resize, but that shouldn't be too hard.
-
 
     $('#selector').piggy({
 		start: {
