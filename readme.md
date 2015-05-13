@@ -9,7 +9,7 @@ The screen is also seen as a percentage. No matter the window size, it is consid
 
 The 6 Element Positions
 ---
-Each element you target will have a point which activates it, and another point which deactivates it. They are described as: Activate/Deactivate when `what percentage of the element's height` is `less than what percentage of the screen's height`.
+Each element you target will have a point which activates it, and another point which deactivates it. They are considered active when `what percentage of the element's height` is `less than what percentage of the screen's height` and vice-versa for deactivating. Here are the 6 element positions for activation and deactivation.
 
  1. Activate when 0% is at 100%, deactivate when 100% is at 0%.
  2. Activate when 100% is at 100%, deactivate when 0% is at 0%.
@@ -20,39 +20,27 @@ Each element you target will have a point which activates it, and another point 
 
 ![](img/howtofarm.jpg)
 
-This needs some labeling, but gives you the idea. #6 is from anywhere to anywhere.
-
 Here is how you use it.
 --
 
-The long form configuration looks like this.
 
     $('#selector').piggy({
 		start: {
 			when: "0%",
 			is: "100%",
-			vals: {
-				x: 0
-			},
 			call: function(){
 			}
 		},
 		end: {
 			when: "100%",
 			at: "0%",
-			vals: {
-				x: 50
-			},
 			call: function(offtop){
 			}
-		},
-		scroll: function(vals){
 		}
     });
 
 
-
-Select your element. specify the points that activate/deactivate, values to track from place to place, and which tracking method you want to use.
+Select your element. specify the points that activate and deactivate it, values to track from place to place, and which tracking method you want to use.
 
 #### activate ####
 `start` is triggered when the element is less than the first boundary
@@ -90,3 +78,22 @@ You can pass a boolean as a second parameter to the piggy function to tell Rende
 TODO
 need to recalculate some stuff when you resize, but that shouldn't be too hard.
 
+
+    $('#selector').piggy({
+		start: {
+			when: "0%",
+			is: "100%",
+			vals: {
+				x: 0
+			}
+		},
+		end: {
+			when: "100%",
+			at: "0%",
+			vals: {
+				x: 50
+			}
+		},
+		scroll: function(vals){
+		}
+    });
