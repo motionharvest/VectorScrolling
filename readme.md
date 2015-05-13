@@ -44,8 +44,6 @@ Here is how you use it.
 Select your element, specify the points that activate and deactivate it, and use the `call` method to take action on it.
 
 #### Animate While Scrolling ####
-`scroll` is triggered when the element is on the screen and the user scrolls. An object is passed as an argument to the `scroll` method containing any properties you've specified inside of `start.vals` and `end.vals` as calculated to the  proportion of the distance between their values depending on the percentage of where your element is between the `start` and `end` values.
-
 
     $('#selector').piggy({
 		start: {
@@ -65,3 +63,5 @@ Select your element, specify the points that activate and deactivate it, and use
 		scroll: function(vals){
 		}
     });
+
+`scroll` is triggered when the element is on the screen and the user scrolls. An object is passed as an argument to the `scroll` method containing any properties you've specified inside of `start.vals` and `end.vals` as calculated to the  proportion of the distance between their values depending on the percentage of where your element is between the `start` and `end` values.
