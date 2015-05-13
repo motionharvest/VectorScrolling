@@ -22,6 +22,7 @@ Each element you target will have a point which activates it, and another point 
 
 Here is how you use it.
 --
+#### Detect on-screen and off-screen ####
 
 
     $('#selector').piggy({
@@ -42,13 +43,7 @@ Here is how you use it.
 
 Select your element, specify the points that activate and deactivate it, and use the `call` method to take action on it.
 
-#### activate ####
-`start` is triggered when the element is less than the first boundary
-
-#### deactivate ####
-`end` is triggered when the element is scrolled back below the first boundary or above the second boundary. A boolean is passed to indicate if the element has been scrolled off the top of the boundary.
-
-#### scroll ####
+#### Animate While Scrolling ####
 `scroll` is triggered when the element is on the screen and the user scrolls. An object is passed as an argument to the `scroll` method containing any properties you've specified inside of `start.vals` and `end.vals` as calculated to the  proportion of the distance between their values depending on the percentage of where your element is between the `start` and `end` values.
 
 
