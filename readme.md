@@ -9,7 +9,7 @@ The screen is also seen as a percentage. No matter the window size, it is consid
 
 The 6 Element Positions
 ---
-Each element you target will have a point which activates it, and another point which deactivates it. They are described as: Activate/Deactivate when `what percentage of the element's height` is `less than what percentage of the screen's height`.
+Each element you target will have a point which activates it, and another point which deactivates it. They are considered active when `what percentage of the element's height` is `less than what percentage of the screen's height` and vice-versa for deactivating. Here are the 6 element positions for activation and deactivation.
 
  1. Activate when 0% is at 100%, deactivate when 100% is at 0%.
  2. Activate when 100% is at 100%, deactivate when 0% is at 0%.
@@ -20,39 +20,27 @@ Each element you target will have a point which activates it, and another point 
 
 ![](img/howtofarm.jpg)
 
-This needs some labeling, but gives you the idea. #6 is from anywhere to anywhere.
-
 Here is how you use it.
 --
 
-The long form configuration looks like this.
 
     $('#selector').piggy({
 		start: {
 			when: "0%",
 			is: "100%",
-			vals: {
-				x: 0
-			},
 			call: function(){
 			}
 		},
 		end: {
 			when: "100%",
 			at: "0%",
-			vals: {
-				x: 50
-			},
 			call: function(offtop){
 			}
-		},
-		scroll: function(vals){
 		}
     });
 
 
-
-Select your element. specify the points that activate/deactivate, values to track from place to place, and which tracking method you want to use.
+Select your element. specify the points that activate and deactivate it, values to track from place to place, and which tracking method you want to use.
 
 #### activate ####
 `start` is triggered when the element is less than the first boundary
@@ -62,3 +50,24 @@ Select your element. specify the points that activate/deactivate, values to trac
 
 #### scroll ####
 `scroll` is triggered when the element is on the screen and the user scrolls. An object is passed as an argument to the `scroll` method containing any properties you've specified inside of `start.vals` and `end.vals` as calculated to the  proportion of the distance between their values depending on the percentage of where your element is between the `start` and `end` values.
+
+
+
+    $('#selector').piggy({
+		start: {
+			when: "0%",
+			is: "100%",
+			vals: {
+				x: 0
+			}
+		},
+		end: {
+			when: "100%",
+			at: "0%",
+			vals: {
+				x: 50
+			}
+		},
+		scroll: function(vals){
+		}
+    });
