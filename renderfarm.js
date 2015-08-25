@@ -55,7 +55,7 @@ module.exports = (function () {
 	function RenderFarm(options) {
 
 		//if an IScroll element has been added, lets use it for scrolling
-		if(options.hasOwnProperty("scroller")) {
+		if(options && options.hasOwnProperty("scroller")) {
 
 			options.scroller.on('scroll', updatePosition);
 			options.scroller.on('scrollEnd', updatePosition);
@@ -72,6 +72,12 @@ module.exports = (function () {
 					onResizeCallbacks[i]();
 				}
 				updatePosition();
+			});
+		}else{
+			$win.scroll(function(e){
+				e.preventDefault();
+				updatePosition();
+				console.log("woop");
 			});
 		}
 
