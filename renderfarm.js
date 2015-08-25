@@ -1,7 +1,5 @@
-/**
- * In this version I'm trying to be more flexible
- */
-(function () {
+
+module.exports = (function () {
 
 	//Mathutils never fails me!
 	var Mathutils = {
@@ -22,7 +20,7 @@
 		}
 	};
 
-	
+
 	//MONITOR THESE
 	var $win = $(window),
 		$scroller,
@@ -54,23 +52,23 @@
 
 
 	//Hook into global instance
-	window.RenderFarm = function(options){
+	function RenderFarm(options) {
 
 		//if an IScroll element has been added, lets use it for scrolling
-		if(options.hasOwnProperty("scroller")){
+		if(options.hasOwnProperty("scroller")) {
 
 			options.scroller.on('scroll', updatePosition);
 			options.scroller.on('scrollEnd', updatePosition);
-			document.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
+			document.addEventListener('touchmove', function(e) { e.preventDefault(); }, false);
 
 			//hold onto this object
 			$scroller = $(options.scroller.scroller);
-			
+
 			//set winHeight on resize
-			$win.resize(function () {
+			$win.resize(function() {
 				wHeight = $win.height();
 				wBottom = wTop + wHeight;
-				for (i = 0; i < onResizeCallbacks.length; i++) {
+				for(i = 0; i < onResizeCallbacks.length; i++) {
 					onResizeCallbacks[i]();
 				}
 				updatePosition();
@@ -79,7 +77,7 @@
 
 		return {
 
-			addPiggy: function(elem, options){
+			addPiggy: function(elem, options) {
 
 				//piggy position
 				var $tmpPiggy = $(elem),
@@ -198,5 +196,5 @@
 		}
 	};
 
-
+	return RenderFarm;
 })();
