@@ -1,6 +1,8 @@
 RenderFarm v3
 ==============================
-It has been determined that there are 6 conditions for start positions and end positions from which elements can animate from and to.
+RenderFarm is a tool to control a JavaScript based animation while you scroll your page.
+
+There are 6 conditions for start positions and end positions from which elements can animate from and to.
 
 DOM elements heights are looked at in percentages. Each DOM element is 100% tall.
 
