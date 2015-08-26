@@ -55,8 +55,7 @@ module.exports = (function () {
 	function RenderFarm(options) {
 
 		//if an IScroll element has been added, lets use it for scrolling
-		if(options && options.hasOwnProperty("scroller")) {
-
+		if(options.hasOwnProperty("scroller")) {
 			options.scroller.on('scroll', updatePosition);
 			options.scroller.on('scrollEnd', updatePosition);
 			document.addEventListener('touchmove', function(e) { e.preventDefault(); }, false);
@@ -73,18 +72,15 @@ module.exports = (function () {
 				}
 				updatePosition();
 			});
-		}else{
-			$win.scroll(function(e){
-				e.preventDefault();
-				updatePosition();
-				console.log("woop");
-			});
 		}
 
 		return {
-
+			destroy: function(){
+				piggies = [];
+				onScrollCallbacks = [];
+				onResizeCallbacks = [];
+			},
 			addPiggy: function(elem, options) {
-
 				//piggy position
 				var $tmpPiggy = $(elem),
 					pTop,
@@ -147,7 +143,7 @@ module.exports = (function () {
 
 
 					}else if((pWhenStart > wTop + (wHeight * options.start.is)
-						|| pWhenEnd < wTop + (wHeight * options.end.is))
+						|| pWhenEnd <= wTop + (wHeight * options.end.is))
 						&& active){
 
 						//nice - deactivate
@@ -176,6 +172,7 @@ module.exports = (function () {
 									options.scroll(1);
 								}
 							}
+
 						}
 					}
 
