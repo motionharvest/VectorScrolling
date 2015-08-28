@@ -35,7 +35,8 @@ module.exports = (function () {
 
 
 	//utility
-	function updatePosition(){
+
+	function updatePosition() {
 		wTop = -(this.y >> 0);
 		wBottom = wTop + wHeight;
 		for (i = 0; i < onScrollCallbacks.length; i++) {
@@ -75,6 +76,13 @@ module.exports = (function () {
 		}
 
 		return {
+			recalculate: function(){
+				wHeight = $win.height();
+				wBottom = wTop + wHeight;
+				for(i = 0; i < onResizeCallbacks.length; i++) {
+					onResizeCallbacks[i]();
+				}
+			},
 			destroy: function(){
 				piggies = [];
 				onScrollCallbacks = [];
@@ -142,9 +150,9 @@ module.exports = (function () {
 						active = true;
 
 
-					}else if((pWhenStart > wTop + (wHeight * options.start.is)
-						|| pWhenEnd <= wTop + (wHeight * options.end.is))
-						&& active){
+					}else if((pWhenStart > wTop + (wHeight * options.start.is) ||
+						pWhenEnd <= wTop + (wHeight * options.end.is)) &&
+						active){
 
 						//nice - deactivate
 						active = false;
@@ -160,16 +168,17 @@ module.exports = (function () {
 								if(options.start.hasOwnProperty("vals") && options.end.hasOwnProperty("vals")){
 									options.scroll(options.start.vals);
 								}else{
-									options.scroll(0);
+									options.scroll({offset:0});
 								}
 							}
 
 						}else{
+							active = false;
 							if(options.hasOwnProperty("scroll")){
 								if(options.start.hasOwnProperty("vals") && options.end.hasOwnProperty("vals")){
 									options.scroll(options.end.vals);
 								}else{
-									options.scroll(1);
+									options.scroll({offset:1});
 								}
 							}
 
@@ -178,8 +187,8 @@ module.exports = (function () {
 
 					//If a scroll is active I'd like to know how far through it is.
 					if(active){
-						track1 = wTop + (wHeight * options.start.is) - pWhenStart;
-						track2 = pWhenEnd - (wTop + (wHeight * options.end.is));
+						track1 = Math.floor(wTop + (wHeight * options.start.is) - pWhenStart);
+						track2 = Math.floor(pWhenEnd - (wTop + (wHeight * options.end.is)));
 						trackPerc = Mathutils.map(track1, 0, track1 + track2, 0, 1);
 
 						//if we have values to check, equalize the values proportionally to trackPerc
