@@ -1,29 +1,6 @@
 module.exports = (function() {
     'use strict';
 
-    //Mathutils never fails me!
-    var Mathutils = {
-        normalize: function($value, $min, $max) {
-            return ($value - $min) / ($max - $min);
-        },
-
-        interpolate: function($normValue, $min, $max) {
-            return $min + ($max - $min) * $normValue;
-        },
-
-        map: function($value, $min1, $max1, $min2, $max2) {
-            if ($value < $min1) {
-                $value = $min1;
-            }
-
-            if ($value > $max1) {
-                $value = $max1;
-            }
-
-            return this.interpolate(this.normalize($value, $min1, $max1), $min2, $max2);
-        }
-    };
-
     //MONITOR THESE
 	var y, totalDist, offset;
 
@@ -34,9 +11,7 @@ module.exports = (function() {
 		function updatePosition() {
 			y = Math.abs(scroller.y);
 			totalDist = Math.abs(scroller.maxScrollY);
-
-			offset = Mathutils.map(y, 0, totalDist, 0, 1);
-
+			offset = y / totalDist;
 			callback({
 				offset: offset
 			});
