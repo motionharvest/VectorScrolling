@@ -6,7 +6,7 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 	<meta name="viewport" content="width=device-width">
 
-	<title>Scroll Mastery - Start or Pause Simple </title>
+	<title>Renderfarm.js Rough Demo </title>
 
 	<style>
 		body {
@@ -224,17 +224,17 @@
 			scroller: myScroll
 		});
 
-
+		//'.data-renderfarm-section4', "start when 0% is 50%"
 		rf.addPiggy("#sec_4", {
 			start: {
-		        when: "0%",
-		        is: "50%",
+		        when: "100%",
+		        is: "100%",
 		        vals: {
 		            time: 0
 		        }
 		    },
 		    end: {
-		        when: "100%",
+		        when: "0%",
 				is: "0%",
 		        vals: {
 		            time: 1
