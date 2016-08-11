@@ -18,7 +18,7 @@ Each element you target will have a point which activates it, and another point 
  5. Activate when 0% is at 100%, deactivate when 100% is at 100%.
  6. Activate when x% is at x%, deactivate when x% is at x%
 
-![](img/howtofarm.jpg)
+![](README/howtofarm.jpg)
 
 Here is how you use it.
 --
