@@ -3,19 +3,19 @@
 		// Now we're wrapping the factory and assigning the return
 		// value to the root (window) and returning it as well to
 		// the AMD loader.
-		define(["postal"], function(postal) {
-			return (root.myModule = factory(postal));
+		define(["renderfarm"], function(postal) {
+			return (root.renderfarm = factory(postal));
 		});
 	} else if (typeof module === "object" && module.exports) {
 		// I've not encountered a need for this yet, since I haven't
 		// run into a scenario where plain modules depend on CommonJS
 		// *and* I happen to be loading in a CJS browser environment
 		// but I'm including it for the sake of being thorough
-		module.exports = (root.myModule = factory(require("postal")));
+		module.exports = (root.renderfarm = factory(require("renderfarm")));
 	} else {
-		root.myModule = factory(root.postal);
+		root.renderfarm = factory();
 	}
-}(this, function(postal) {
+}(this, function() {
 	//Mathutils never fails me!
 	var Mathutils = {
 		normalize: function($value, $min, $max) {
