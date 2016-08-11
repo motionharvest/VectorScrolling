@@ -1,0 +1,40 @@
+{
+  "name": "renderfarm",
+  "version": "1.0.0",
+  "description": "Scrolling animation library. A practical website implementation for animation designers and graphic artists. Leverating GSAP out of the box, but compatible with any technology with a seek() method.",
+  "main": "dist/renderfarm.min.js",
+  "directories": {
+    "example": "examples"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cmndo/RenderFarm.git"
+  },
+  "keywords": [
+    "scrolling",
+    "animation",
+    "gsap",
+    "timeline",
+    "scroll",
+    "iphone",
+    "mobile",
+    "iscroll",
+    "magic",
+    "handy"
+  ],
+  "author": "Aaron Sherrill",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/cmndo/RenderFarm/issues"
+  },
+  "homepage": "https://github.com/cmndo/RenderFarm#readme",
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-rename": "^1.2.2",
+    "gulp-uglify": "^2.0.0",
+    "pump": "^1.0.1"
+  }
+}
