@@ -25,7 +25,7 @@ Here is how you use it.
 #### Detect on-screen and off-screen ####
 
 
-    $('#selector').piggy({
+    $('#selector').addPiggy({
 		start: {
 			when: "0%",
 			is: "100%",
@@ -45,7 +45,7 @@ Select your element, specify the points that activate and deactivate it, and use
 
 #### Animate While Scrolling ####
 
-    $('#selector').piggy({
+    $('#selector').addPiggy({
 		start: {
 			when: "0%",
 			is: "100%",
