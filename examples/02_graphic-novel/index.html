@@ -212,20 +212,26 @@
 		rf.addPiggy("#sec_4", {
 			start: {
 		        when: "0%",
-		        is: "50%",
+		        is: "20%",
 		        vals: {
 		            time: 0
+		        },
+		        call: function(fromBottom) {
+		        	console.log("fromBottom", fromBottom);
 		        }
 		    },
 		    end: {
 		        when: "100%",
-				is: "0%",
+				is: "75%",
 		        vals: {
 		            time: 1
+		        },
+		        call: function(offTop) {
+		        	console.log("offTop", offTop);
+
 		        }
 		    },
 		    scroll: function(vals){
-		    	console.log("what you got?");
 				tl_example.seek(tl_example.totalDuration() * vals.time);
 		    }
 		});

@@ -178,8 +178,6 @@
 				//I need to know what the breakpoints are
 				onScrollCallbacks.push(function() {
 
-					console.log(wTop, wBottom)
-
 					//check if we're inside the window start and end.
 					if (pWhenStart < wTop + (wHeight * options.start.is) &&
 						pWhenEnd > wTop + (wHeight * options.end.is) &&
@@ -187,7 +185,15 @@
 
 						//call once if we haven't activated yet, and call() exists
 						if (options.start.hasOwnProperty("call") && !active) {
-							options.start.call();
+
+							//check if it's coming on from the bottom
+							//console.log(pTop, pHeight, pWhenStart, pWhenEnd, wTop);
+							if(wTop > pTop) {
+								options.start.call(false);
+							} else {
+								options.start.call(true);
+							}
+
 						}
 						active = true;
 
@@ -198,11 +204,10 @@
 
 						//nice - deactivate
 						active = false;
-						if (options.end.hasOwnProperty("call")) {
-							options.end.call();
-						}
+
 
 						//when deactivating, check if its off the bottom, or off the top, and force a scroll call
+
 						if ((pWhenEnd > wTop + (wHeight * options.end.is))) {
 							//off bottom
 							//if we have values to check, equalize the values proportionally to trackPerc
@@ -216,6 +221,10 @@
 								}
 							}
 
+							if (options.end.hasOwnProperty("call")) {
+								options.end.call(false);
+							}
+
 						} else {
 							active = false;
 							if (options.hasOwnProperty("scroll")) {
@@ -226,6 +235,10 @@
 										offset: 1
 									});
 								}
+							}
+
+							if (options.end.hasOwnProperty("call")) {
+								options.end.call(true);
 							}
 
 						}
