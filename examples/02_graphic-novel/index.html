@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset=utf-8 />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width">
+
+	<title>Example | Graphic Novel Idea</title>
+
+	<style>
+		body {
+			font-size: 12px;
+			font-family: ubuntu, helvetica, arial;
+		}
+		section {
+			border: solid 0px red;
+			width: 100%;
+			height: 600px;
+		}
+		section.active {
+			border: solid 3px green;
+		}
+		#wrapper {
+			position: absolute;
+			z-index: 1;
+			top: 0px;
+			bottom: 0px;
+			left: 0;
+			width: 100%;
+		}
+		#scroller {
+			position: absolute;
+			z-index: 1;
+			-webkit-tap-highlight-color: rgba(0,0,0,0);
+			width: 100%;
+			-webkit-transform: translateZ(0);
+			-moz-transform: translateZ(0);
+			-ms-transform: translateZ(0);
+			-o-transform: translateZ(0);
+			transform: translateZ(0);
+			-webkit-touch-callout: none;
+			-webkit-user-select: none;
+			-moz-user-select: none;
+			-ms-user-select: none;
+			user-select: none;
+			-webkit-text-size-adjust: none;
+			-moz-text-size-adjust: none;
+			-ms-text-size-adjust: none;
+			-o-text-size-adjust: none;
+			text-size-adjust: none;
+		}
+
+
+	</style>
+	<style type="text/css">
+			/*
+		 	Section Four
+		 	* */
+			#sec_4 {
+				overflow: hidden;
+				position: relative;
+	    		height: 638px;
+	    		width: 100%;
+				background: url(img/tactile_noise.png);
+				padding: 0px;
+			}
+			#sec_4 .bg{
+				position: absolute;
+				width: 1529px;
+				height: 552px;
+				margin: auto 50%;
+				left: -764px;
+				top: 30px;
+				background: url(img/dungeon-bg.png);
+			}
+			#sec_4 .slate{
+				position: absolute;
+				width: 245px;
+				height: 127px;
+				margin: auto 50%;
+				left: -112px;
+				top: 0px;
+				background: url(img/dungeon-slate.png);
+			}
+			#sec_4 .thumbnails{
+				position: absolute;
+				width: 1065px;
+				height: 139px;
+				margin: auto 50%;
+				left: -532px;
+				top: 480px;
+				background: url(img/dungeon-thumbnails.png);
+			}
+			#sec_4 .frame{
+				position: absolute;
+				width: 774px;
+				height: 469px;
+				margin: auto 50%;
+				left: -387px;
+				top: 100px;
+				background: url(img/dungeon-frame.png);
+			}
+			#sec_4 .beast{
+				position: absolute;
+				width: 627px;
+				height: 434px;
+				margin: auto 50%;
+				left: -258px;
+				top: 220px;
+				background: url(img/dungeon-beast.png);
+			}
+			#sec_4 .beast-head{
+				position: absolute;
+				width: 225px;
+				height: 294px;
+				margin: auto 50%;
+				left: -157px;
+				top: 230px;
+				background: url(img/dungeon-beast-head.png);
+			}
+			#sec_4 .beast-blood{
+				position: absolute;
+				width: 316px;
+				height: 161px;
+				margin: auto 50%;
+				left: -40px;
+				top: 270px;
+				background: url(img/dungeon-beast-blood.png);
+			}
+			#sec_4 .hero{
+				position: absolute;
+				width: 266px;
+				height: 278px;
+				margin: auto 50%;
+				left: -267px;
+				top: 370px;
+				background: url(img/dungeon-hero.png);
+			}
+			#sec_4 .grass{
+				position: absolute;
+				width: 374px;
+				height: 65px;
+				margin: auto 50%;
+				left: -317px;
+				top: 585px;
+				background: url(img/dungeon-grass.png);
+			}
+
+		</style>
+</head>
+
+<body>
+
+	<section id="sec_0">This is my new favorite thing. Scroll Down (works on mobile).</section>
+	<section id="sec_1"></section>
+	<section id="sec_2"></section>
+	<section id="sec_3"></section>
+	<section id="sec_4">
+		<div class="bg"></div>
+		<div class="slate"></div>
+		<div class="thumbnails"></div>
+		<div class="frame"></div>
+		<div class="beast"></div>
+		<div class="beast-blood"></div>
+		<div class="beast-head"></div>
+		<div class="hero"></div>
+		<div class="grass"></div>
+	</section>
+	<section id="sec_5"></section>
+	<section id="sec_6"></section>
+
+
+	<script type="text/javascript" src="js/libs/jquery-1.9.1.min.js"></script>
+	<script type="text/javascript" src="js/libs/iscroll-probe.js"></script>
+	<script type="text/javascript" src="js/libs/TweenMax.min.js"></script>
+	<script type="text/javascript" src="../../dist/renderfarm.min.js"></script>
+
+	<script>
+
+
+		/*
+			Build out the animation we'll be testing (Uses GSAP's TimelineLite)
+		*/
+		var tl_example = new TimelineLite();
+
+		//linear easing is best
+		TweenLite.defaultEase = Linear.easeNone;
+
+		//construct each transition in the sequence. as if each sequence is 10 seconds long, 1 second is 10% of the total animation length. makes it a little easier to visualize.
+		var head = 			new TweenLite.to($('.beast-head', '#sec_4'), 10, {x: 80, y:120, rotationZ: -15});
+		var beast =			new TweenLite.to($('.beast', '#sec_4'), 10, {x:100});
+		var blood = 		new TweenLite.from($('.beast-blood', '#sec_4'), 1, {delay:5, width: 1});
+		var bloodMove = 	new TweenLite.to($('.beast-blood', '#sec_4'), 10, {x:100});
+		var hero = 			new TweenLite.to($('.hero', '#sec_4'), 10, {x:-100});
+		var grass = 		new TweenLite.to($('.grass', '#sec_4'), 10, {x:-180});
+		var frame = 		new TweenLite.to($('.frame', '#sec_4'), 10, {x:80});
+		var thumbnails = 	new TweenLite.to($('.thumbnails', '#sec_4'), 10, {x:130});
+
+		//add tweens to timeline and pause them.
+		tl_example.add( [head, beast, blood, bloodMove, hero, grass, frame, thumbnails] );
+		tl_example.pause();
+
+
+		/*
+			Now lets use Renderfarm and iScroll to track the scrolling. This is broken, but when its fixed it will work on mobile.
+		*/
+
+		var rf = new renderfarm({});
+
+		//'.data-renderfarm-section4', "start when 0% is 50%"
+		rf.addPiggy("#sec_4", {
+			start: {
+		        when: "0%",
+		        is: "50%",
+		        vals: {
+		            time: 0
+		        }
+		    },
+		    end: {
+		        when: "100%",
+				is: "0%",
+		        vals: {
+		            time: 1
+		        }
+		    },
+		    scroll: function(vals){
+		    	console.log("what you got?");
+				tl_example.seek(tl_example.totalDuration() * vals.time);
+		    }
+		});
+
+
+	</script>
+
+</body>
+
+</html>

@@ -52,7 +52,12 @@
 	//utility
 
 	function updatePosition() {
-		wTop = -(this.y >> 0);
+		if(this.hasOwnProperty("y")) {
+			wTop = -(this.y >> 0);
+		} else {
+			wTop = $scroller.scrollTop();
+		}
+
 		wBottom = wTop + wHeight;
 		for (i = 0; i < onScrollCallbacks.length; i++) {
 			onScrollCallbacks[i]();
@@ -91,6 +96,23 @@
 				}
 				updatePosition();
 			});
+		} else {
+			$scroller = $(window);
+			$scroller.scroll(function(){
+				updatePosition();
+			});
+			updatePosition();
+
+			//set winHeight on resize
+			$win.resize(function() {
+				wHeight = $win.height();
+				wBottom = wTop + wHeight;
+				for (i = 0; i < onResizeCallbacks.length; i++) {
+					onResizeCallbacks[i]();
+				}
+				updatePosition();
+			});
+
 		}
 
 		return {
@@ -146,7 +168,7 @@
 
 				//Begin with knowing values dependant on sizing
 				onResizeCallbacks.push(function() {
-					pTop = $tmpPiggy.position().top;
+					pTop = $tmpPiggy.offset().top;
 					pHeight = $tmpPiggy.height();
 					pWhenStart = pTop + (pHeight * options.start.when);
 					pWhenEnd = pTop + (pHeight * options.end.when);
@@ -155,6 +177,8 @@
 
 				//I need to know what the breakpoints are
 				onScrollCallbacks.push(function() {
+
+					console.log(wTop, wBottom)
 
 					//check if we're inside the window start and end.
 					if (pWhenStart < wTop + (wHeight * options.start.is) &&
