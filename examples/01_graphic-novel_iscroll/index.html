@@ -64,8 +64,8 @@
 				position: relative;
 	    		height: 638px;
 	    		width: 100%;
-				background: url(img/tactile_noise.png);
 				padding: 0px;
+				border: solid 4px red;
 			}
 			#sec_4 .bg{
 				position: absolute;
@@ -183,25 +183,19 @@
 	<script>
 
 		/*
-			IScroll Instance for mobile enabled scrolling
-		*/
-		var myScroll = new IScroll('#wrapper', {
-			probeType: 3,
-			mouseWheel: true,
-    		scrollbars: true
-		});
-
-
-
-		/*
-			Build out the animation we'll be testing (Uses GSAP's TimelineLite)
+			Build out the animation of our hero slicing the head off of a monster
+			++ Set the default easing to no-easing. Personal preference.
 		*/
 		var tl_example = new TimelineLite();
+		//TweenLite.defaultEase = Linear.easeNone;
 
-		//linear easing is best
-		TweenLite.defaultEase = Linear.easeNone;
-
-		//construct each transition in the sequence. as if each sequence is 10 seconds long, 1 second is 10% of the total animation length. makes it a little easier to visualize.
+		/*
+			Construct each element's transition in the animation.
+			The 2nd argument is the length of the animation, and as you'll see, doesn't matter. 10 is good.
+			Then you can think in terms of 1 second being 10% of the total animation length.
+			How long the animation takes is controlled by how fast the user scrolls, what's important is the
+			sequence's flow.
+		*/
 		var head = 			new TweenLite.to($('.beast-head', '#sec_4'), 10, {x: 80, y:120, rotationZ: -15});
 		var beast =			new TweenLite.to($('.beast', '#sec_4'), 10, {x:100});
 		var blood = 		new TweenLite.from($('.beast-blood', '#sec_4'), 1, {delay:5, width: 1});
@@ -211,37 +205,35 @@
 		var frame = 		new TweenLite.to($('.frame', '#sec_4'), 10, {x:80});
 		var thumbnails = 	new TweenLite.to($('.thumbnails', '#sec_4'), 10, {x:130});
 
-		//add tweens to timeline and pause them.
 		tl_example.add( [head, beast, blood, bloodMove, hero, grass, frame, thumbnails] );
 		tl_example.pause();
 
 
 		/*
-			Now lets use Renderfarm and iScroll to track the scrolling. This is broken, but when its fixed it will work on mobile.
+			Instantiate IScroll
+			Instantiate Renderfarm and pass it the iScroll instance.
 		*/
 
-		var rf = new renderfarm({
-			scroller: myScroll
+		var iScrollWrapper = new IScroll('#wrapper', {
+			probeType: 3,
+			mouseWheel: true,
+    		scrollbars: true
 		});
+
+		var rf = new renderfarm(iScrollWrapper);
 
 		//'.data-renderfarm-section4', "start when 0% is 50%"
 		rf.addPiggy("#sec_4", {
 			start: {
 		        when: "0%",
-		        is: "50%",
-		        vals: {
-		            time: 0
-		        }
+		        is: "50%"
 		    },
 		    end: {
 		        when: "100%",
-				is: "0%",
-		        vals: {
-		            time: 1
-		        }
+				is: "20%"
 		    },
-		    scroll: function(vals){
-				tl_example.seek(tl_example.totalDuration() * vals.time);
+		    scroll: function(options){
+				tl_example.seek(tl_example.totalDuration() * options.offset);
 		    }
 		});
 

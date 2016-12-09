@@ -36,93 +36,81 @@
 	};
 
 
-	//MONITOR THESE
-	var $win = $(window),
-		$scroller,
-		wHeight,
-		wBottom,
-		wTop = 0,
-		piggies = [],
-		onScrollCallbacks = [],
-		onResizeCallbacks = [],
-		i,
-		tmpVals;
 
-
-	//utility
-
-	function updatePosition() {
-		if(this.hasOwnProperty("y")) {
-			wTop = -(this.y >> 0);
-		} else {
-			wTop = $scroller.scrollTop();
-		}
-
-		wBottom = wTop + wHeight;
-		for (i = 0; i < onScrollCallbacks.length; i++) {
-			onScrollCallbacks[i]();
-		}
-	}
-
-	function equalize(perc, from, to) {
-		tmpVals = {};
-		for (i in from) {
-			tmpVals[i] = Mathutils.map(perc, 0, 1, from[i], to[i]);
-		}
-		return tmpVals;
-	}
 
 
 	//Hook into global instance
-	function RenderFarm(options) {
+	function RenderFarm(iScrollInstance) {
 
-		//if an IScroll element has been added, lets use it for scrolling
-		if (options.hasOwnProperty("scroller")) {
-			options.scroller.on('scroll', updatePosition);
-			options.scroller.on('scrollEnd', updatePosition);
-			document.addEventListener('touchmove', function(e) {
-				e.preventDefault();
-			}, false);
+		//MONITOR THESE
+		var $win = $(window),
+			wHeight,
+			wBottom,
+			wTop = 0,
+			piggies = [],
+			onScrollCallbacks = [],
+			onResizeCallbacks = [],
+			i,
+			tmpVals;
 
-			//hold onto this object
-			$scroller = $(options.scroller.scroller);
-
-			//set winHeight on resize
-			$win.resize(function() {
-				wHeight = $win.height();
-				wBottom = wTop + wHeight;
-				for (i = 0; i < onResizeCallbacks.length; i++) {
-					onResizeCallbacks[i]();
-				}
-				updatePosition();
-			});
-		} else {
-			$scroller = $(window);
-			$scroller.scroll(function(){
-				updatePosition();
-			});
-			updatePosition();
-
-			//set winHeight on resize
-			$win.resize(function() {
-				wHeight = $win.height();
-				wBottom = wTop + wHeight;
-				for (i = 0; i < onResizeCallbacks.length; i++) {
-					onResizeCallbacks[i]();
-				}
-				updatePosition();
-			});
-
+		function equalize(perc, from, to) {
+			tmpVals = {};
+			for (i in from) {
+				tmpVals[i] = Mathutils.map(perc, 0, 1, from[i], to[i]);
+			}
+			return tmpVals;
 		}
 
+		//when scrolled to the top
+		// wTop = 0;
+		// wBottom = 0 + height;
+		/*
+			if you scroll down 10 pixels, then resize
+			when you get down to #section4, the animation happens 10 pixels too soon
+		*/
+		function recalculate() {
+			wHeight = $(window).height();
+			wTop = -iScrollInstance.y;
+			wBottom = Math.abs(wTop) + wHeight;
+
+			console.log("recalculate", wHeight, wTop, wBottom);
+
+			for (i = 0; i < onResizeCallbacks.length; i++) {
+				onResizeCallbacks[i]();
+			}
+
+			console.log(wHeight, wTop, wBottom)
+		}
+
+		function updatePosition() {
+			wTop = -iScrollInstance.y;
+			wBottom = wTop + wHeight;
+			for (i = 0; i < onScrollCallbacks.length; i++) {
+				onScrollCallbacks[i]();
+			}
+
+			console.log(wHeight, wTop, wBottom)
+		}
+
+		/*
+			Set events for iscroll
+			Cancel touchmove events
+		*/
+		iScrollInstance.on('scroll', updatePosition);
+		iScrollInstance.on('scrollEnd', updatePosition);
+		document.addEventListener('touchmove', function(event) {
+			event.preventDefault();
+		}, false);
+
+
+		//set winHeight on resize
+		$win.resize(function() {
+			recalculate();
+			updatePosition();
+		});
+
+
 		return {
-			recalculate: function() {
-				wHeight = $win.height();
-				wBottom = wTop + wHeight;
-				for (i = 0; i < onResizeCallbacks.length; i++) {
-					onResizeCallbacks[i]();
-				}
-			},
 			destroy: function() {
 				piggies = [];
 				onScrollCallbacks = [];
@@ -168,7 +156,7 @@
 
 				//Begin with knowing values dependant on sizing
 				onResizeCallbacks.push(function() {
-					pTop = $tmpPiggy.offset().top;
+					pTop = $tmpPiggy.position().top;
 					pHeight = $tmpPiggy.height();
 					pWhenStart = pTop + (pHeight * options.start.when);
 					pWhenEnd = pTop + (pHeight * options.end.when);
@@ -263,7 +251,7 @@
 					}
 				});
 
-				$win.resize();
+				recalculate();
 			}
 		}
 	};
