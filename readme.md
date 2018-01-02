@@ -31,9 +31,8 @@ Here is how you use it.
     var vs = require('vectorscroll');
     var elem = document.getElementById("#myTarget");
 
-	vs(elem, {
-		consition: 2,
-		timeline: myGSAPTimeline
+	vs(elem, myGSAPTimeline, {
+		consition: 2
 	});
 
 
@@ -41,7 +40,7 @@ Here is how you use it.
     var vs = require('vectorscroll');
     var elem = document.getElementById("#myTarget");
 
-	vs(elem, {
+	vs(elem, myGSAPTimeline, {
 		consition: 6,
 		start: {
 			when: "25%",
@@ -77,7 +76,7 @@ If you look at condition 6, you'll notice a bunch of options. These are availabl
 	var vs = require('vectorscroll');
     var elem = document.getElementById("#myTarget");
 
-	vs(elem, {
+	vs(elem, myGSAPTimeline, {
 		start: {
 			vals: {
 				miles: 100
