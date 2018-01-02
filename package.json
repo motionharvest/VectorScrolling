@@ -1,6 +1,6 @@
 {
   "name": "vectorscrolling",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Scrolling animation library. A practical website implementation for animation designers and graphic artists. Leverating GSAP out of the box, but compatible with any technology with a seek() method.",
   "main": "dist/vs.min.js",
   "directories": {
