@@ -41,6 +41,7 @@
 		for (i in from) {
 			tmpVals[i] = Mathutils.map(perc, 0, 1, from[i], to[i]);
 		}
+		tmpVals.offset = perc;
 		return tmpVals;
 	}
 
@@ -57,7 +58,6 @@
 		}
 
 		defaults.scroll = function(options) {
-			console.log("definitely scrolling");
 			timeline.seek(timeline.totalDuration() * options.offset)
 		}
 
@@ -67,12 +67,19 @@
 		if(options !== undefined && typeof(options) == "object") {
 			for(var key in defaults) {
 				if(options.hasOwnProperty(key)) {
-					defaults[key] = options[key];
+					if(key === "scroll") {
+						defaults.userScroll = options[key];
+						defaults[key] = function(options) {
+							defaults.userScroll(options);
+							timeline.seek(timeline.totalDuration() * options.offset);
+						}
+					} else {
+						defaults[key] = options[key];
+					}
 				}
 			}
 		}
 
-		console.log(defaults);
 
 		// save configuration variables based on the condition
 		switch(defaults.condition) {
