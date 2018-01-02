@@ -1,67 +1,99 @@
-RenderFarm v3
+Control, control, control
 ==============================
-It has been determined that there are 6 conditions for start positions and end positions from which elements can animate from and to.
+I have determined that there are 5 different ways that you might need control your scrolling animations. Look at the visual aid below.
 
-DOM elements heights are looked at in percentages. Each DOM element is 100% tall.
-
-The screen is also seen as a percentage. No matter the window size, it is considered 100% tall. With that in mind, the "TOP" is 0% and the "BOTTOM" is 100%.
-
-
-The 6 Element Positions
+The 5 Element Positions
 ---
-Each element you target will have a point which activates it, and another point which deactivates it. They are considered active when `what percentage of the element's height` is `less than what percentage of the screen's height` and vice-versa for deactivating. Here are the 6 element positions for activation and deactivation.
+Since I'm a creative technologist this description of how it works is most likely going to be complicated. You target any of your elements and think about when it comes into view. Does the animation start as it comes into view, or does the animation wait until the entire element is on the screen? This whole system is based on percentages. The elements you target will have a point which activates the animation, and another point which deactivates it.
+
+The logic here is to active when `what percentage of your element's height` is `less than what percentage of the screen's height` and vice-versa for deactivating. Confusing, i know. Here are the 6 element positions for activation and deactivation, and a handy graphic for explaining them.
 
  1. Activate when 0% is at 100%, deactivate when 100% is at 0%.
  2. Activate when 100% is at 100%, deactivate when 0% is at 0%.
  3. Activate when 0% is at 0%, deactivate when 100% is at 100%.
  4. Activate when 0% is at 0%, deactivate when 100% is at 0%.
  5. Activate when 0% is at 100%, deactivate when 100% is at 100%.
- 6. Activate when x% is at x%, deactivate when x% is at x%
 
 ![](README/howtofarm.jpg)
 
 Here is how you use it.
 --
-#### Detect on-screen and off-screen ####
+#### Control a GSAP Timeline Animation ####
+    var vs = require('vectorscroll');
+    var elem = document.getElementById("#myTarget");
+
+	vs(elem, myGSAPTimeline);
 
 
-    $('#selector').addPiggy({
+
+
+#### Customize the Scroll Condition ####
+    var vs = require('vectorscroll');
+    var elem = document.getElementById("#myTarget");
+
+	vs(elem, {
+		consition: 2,
+		timeline: myGSAPTimeline
+	});
+
+
+#### Advanced - Condition 6 - Custom Everything ####
+    var vs = require('vectorscroll');
+    var elem = document.getElementById("#myTarget");
+
+	vs(elem, {
+		consition: 6,
 		start: {
-			when: "0%",
+			when: "25%",
 			is: "100%",
+			vals: {
+				step: 0
+			},
 			call: function(){
+				console.log("this element has entered the start condition");
 			}
 		},
 		end: {
-			when: "100%",
-			at: "0%",
-			call: function(){
-			}
-		}
-    });
-
-
-Select your element, specify the points that activate and deactivate it, and use the `call` method to take action on it.
-
-#### Animate While Scrolling ####
-
-    $('#selector').addPiggy({
-		start: {
-			when: "0%",
-			is: "100%",
+			when: "75%",
+			is: "0%",
 			vals: {
-				x: 0
+				step: 255
+			},
+			call: function(){
+				console.log("this element has left the end condition");
+			}
+		},
+		scroll: function(vals) {
+			console.log(vals); 
+			// returns vals object with properties at their percentage through the states.
+		}
+	});
+
+
+Power Options
+---
+If you look at condition 6, you'll notice a bunch of options. These are available for all of the above examples. You can leverage the time-saving features with the default condition, but also react when the element is within the condition's range.
+
+	var vs = require('vectorscroll');
+    var elem = document.getElementById("#myTarget");
+
+	vs(elem, {
+		start: {
+			vals: {
+				miles: 100
 			}
 		},
 		end: {
-			when: "100%",
-			at: "0%",
 			vals: {
-				x: 50
+				miles: 200
 			}
 		},
-		scroll: function(vals){
+		scroll: function(vals) {
+			console.log(vals)
 		}
-    });
+	});
 
-`scroll` is triggered when the element is on the screen and the user scrolls. An object is passed as an argument to the `scroll` method containing any properties you've specified inside of `start.vals` and `end.vals` as calculated to the  proportion of the distance between their values depending on the percentage of where your element is between the `start` and `end` values.
+
+Have fun
+---
+I've been building this for a long time. ScrollMagic.io has it's own approach, and has a huge user-base. I think it can even do the GSAP Timeline control stuff that this library does. So this is just another way to do it. Id love to hear your thoughts on it. 

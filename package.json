@@ -1,8 +1,8 @@
 {
-  "name": "renderfarm",
-  "version": "1.0.0",
+  "name": "VectorScrolling",
+  "version": "2.0.0",
   "description": "Scrolling animation library. A practical website implementation for animation designers and graphic artists. Leverating GSAP out of the box, but compatible with any technology with a seek() method.",
-  "main": "dist/renderfarm.min.js",
+  "main": "dist/vs.min.js",
   "directories": {
     "example": "examples"
   },
@@ -11,7 +11,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/cmndo/RenderFarm.git"
+    "url": "git+https://github.com/cmndo/VectorScrolling.git"
   },
   "keywords": [
     "scrolling",
@@ -21,20 +21,18 @@
     "scroll",
     "iphone",
     "mobile",
-    "iscroll",
     "magic",
     "handy"
   ],
   "author": "Aaron Sherrill",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/cmndo/RenderFarm/issues"
+    "url": "https://github.com/cmndo/VectorScrolling/issues"
   },
-  "homepage": "https://github.com/cmndo/RenderFarm#readme",
+  "homepage": "https://cmndo.github.io/VectorScrolling/",
   "devDependencies": {
     "gulp": "^3.9.1",
     "gulp-rename": "^1.2.2",
-    "gulp-uglify": "^2.0.0",
-    "pump": "^1.0.1"
+    "gulp-uglify": "^2.1.2"
   }
 }
