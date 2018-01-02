@@ -27,6 +27,11 @@ function equalize(perc, from, to) {
 }
 
 
+function $$(el){
+  return el.nodeName ? el : el[0].nodeName ? el[0] : document.querySelector(el);
+}
+
+
 
 //Animate GSAP Timelines as you scroll.
 function vs(elem_or_selector, timeline, options) {
@@ -105,13 +110,13 @@ function vs(elem_or_selector, timeline, options) {
 	// MONITOR THESE
 	var last_known_scroll_position = 0,
 		ticking = false,
-		$win = $(window),
+		$win = window,
 		wHeight,
 		wBottom,
 		wTop = 0,
 		i,
 		tmpVals,
-		$tmpPiggy = $(elem_or_selector),
+		$tmpPiggy = $$(elem_or_selector),
 		active = false;
 
 	function doSomething(scroll_pos) {
@@ -230,12 +235,12 @@ function vs(elem_or_selector, timeline, options) {
 	
 
 	function recalculate() {
-		wHeight = $(window).height();
+		wHeight = window.innerHeight;
 		wTop = last_known_scroll_position;
 		wBottom = Math.abs(wTop) + wHeight;
 
-		pTop = $tmpPiggy.position().top;
-		pHeight = $tmpPiggy.height();
+		pTop = $tmpPiggy.offsetTop;
+		pHeight = $tmpPiggy.clientHeight;
 		pWhenStart = pTop + (pHeight * defaults.start.when);
 		pWhenEnd = pTop + (pHeight * defaults.end.when);
 
@@ -245,10 +250,10 @@ function vs(elem_or_selector, timeline, options) {
 	
 
 	//set winHeight on resize
-	$win.resize(function() {
+	window.addEventListenr('resize',function() {
 		recalculate();
 		doSomething(last_known_scroll_position);
-	});
+	}, { passive: true });
 
 	recalculate();
 
