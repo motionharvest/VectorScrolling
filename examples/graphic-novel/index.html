@@ -12,7 +12,6 @@
 		body {
 			font-size: 12px;
 			font-family: ubuntu, helvetica, arial;
-			overflow: hidden; /* this is important to prevent the whole page to bounce */
 		}
 		section {
 			border: solid 0px red;
@@ -22,37 +21,7 @@
 		section.active {
 			border: solid 3px green;
 		}
-		#wrapper {
-			position: absolute;
-			z-index: 1;
-			top: 0px;
-			bottom: 0px;
-			left: 0;
-			width: 100%;
-			overflow: hidden;
-		}
-		#scroller {
-			position: absolute;
-			z-index: 1;
-			-webkit-tap-highlight-color: rgba(0,0,0,0);
-			width: 100%;
-			-webkit-transform: translateZ(0);
-			-moz-transform: translateZ(0);
-			-ms-transform: translateZ(0);
-			-o-transform: translateZ(0);
-			transform: translateZ(0);
-			-webkit-touch-callout: none;
-			-webkit-user-select: none;
-			-moz-user-select: none;
-			-ms-user-select: none;
-			user-select: none;
-			-webkit-text-size-adjust: none;
-			-moz-text-size-adjust: none;
-			-ms-text-size-adjust: none;
-			-o-text-size-adjust: none;
-			text-size-adjust: none;
-		}
-
+		
 
 	</style>
 	<style type="text/css">
@@ -153,30 +122,27 @@
 </head>
 
 <body>
-	<div id="wrapper">
-		<div id="scroller">
-			<section id="sec_0">This is my new favorite thing. Scroll Down (works on mobile).</section>
-			<section id="sec_1"></section>
-			<section id="sec_2"></section>
-			<section id="sec_3"></section>
-			<section id="sec_4">
-				<div class="bg"></div>
-				<div class="slate"></div>
-				<div class="thumbnails"></div>
-				<div class="frame"></div>
-				<div class="beast"></div>
-				<div class="beast-blood"></div>
-				<div class="beast-head"></div>
-				<div class="hero"></div>
-				<div class="grass"></div>
-			</section>
-			<section id="sec_5"></section>
-			<section id="sec_6"></section>
-		</div>
-	</div>
+	
+	<section id="sec_0">This is my new favorite thing. Scroll Down (works on mobile).</section>
+	<section id="sec_1"></section>
+	<section id="sec_2"></section>
+	<section id="sec_3"></section>
+	<section id="sec_4">
+		<div class="bg"></div>
+		<div class="slate"></div>
+		<div class="thumbnails"></div>
+		<div class="frame"></div>
+		<div class="beast"></div>
+		<div class="beast-blood"></div>
+		<div class="beast-head"></div>
+		<div class="hero"></div>
+		<div class="grass"></div>
+	</section>
+	<section id="sec_5"></section>
+	<section id="sec_6"></section>
+		
 
 	<script type="text/javascript" src="js/libs/jquery-1.9.1.min.js"></script>
-	<script type="text/javascript" src="js/libs/iscroll-probe.js"></script>
 	<script type="text/javascript" src="js/libs/TweenMax.min.js"></script>
 	<script type="text/javascript" src="../../dist/vs.min.js"></script>
 
@@ -209,32 +175,18 @@
 		tl_example.pause();
 
 
-		/*
-			Instantiate IScroll
-			Instantiate Renderfarm and pass it the iScroll instance.
-		*/
 
-		var iScrollWrapper = new IScroll('#wrapper', {
-			probeType: 3,
-			mouseWheel: true,
-    		scrollbars: true
-		});
-
-		var rf = new renderfarm(iScrollWrapper);
-
-		//'.data-renderfarm-section4', "start when 0% is 50%"
-		rf.addPiggy("#sec_4", {
+		//use VectorScrolling in it's most basic form
+		vs("#sec_4", tl_example, {
+			condition: 6,
 			start: {
-		        when: "0%",
-		        is: "50%"
-		    },
-		    end: {
-		        when: "100%",
-				is: "20%"
-		    },
-		    scroll: function(options){
-				tl_example.seek(tl_example.totalDuration() * options.offset);
-		    }
+				when: "50%",
+				is: "50%"
+			},
+			end: {
+				when: "100%",
+				is: "0%"
+			}
 		});
 
 
