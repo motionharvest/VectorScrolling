@@ -2,6 +2,8 @@ Control, control, control
 ==============================
 I have determined that there are 5 different ways that you might need control your scrolling animations. Look at the visual aid below.
 
+[Demo](https://codepen.io/motionharvest/full/PwoRyx/)
+
 The 5 Element Positions
 ---
 Since I'm a creative technologist this description of how it works is most likely going to be complicated. You target any of your elements and think about when it comes into view. Does the animation start as it comes into view, or does the animation wait until the entire element is on the screen? This whole system is based on percentages. The elements you target will have a point which activates the animation, and another point which deactivates it.
