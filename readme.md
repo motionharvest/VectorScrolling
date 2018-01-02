@@ -32,7 +32,7 @@ Here is how you use it.
     var elem = document.getElementById("#myTarget");
 
 	vs(elem, myGSAPTimeline, {
-		consition: 2
+		condition: 2
 	});
 
 
@@ -41,7 +41,7 @@ Here is how you use it.
     var elem = document.getElementById("#myTarget");
 
 	vs(elem, myGSAPTimeline, {
-		consition: 6,
+		condition: 6,
 		start: {
 			when: "25%",
 			is: "100%",
