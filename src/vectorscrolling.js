@@ -1,21 +1,21 @@
-(function (root, factory) {
-	if(typeof define === "function" && define.amd) {
-	  // Now we're wrapping the factory and assigning the return
-	  // value to the root (window) and returning it as well to
-	  // the AMD loader.
-	  define(["postal"], function(postal){
-		return (root.vs = factory(postal));
-	  });
-	} else if(typeof module === "object" && module.exports) {
-	  // I've not encountered a need for this yet, since I haven't
-	  // run into a scenario where plain modules depend on CommonJS
-	  // *and* I happen to be loading in a CJS browser environment
-	  // but I'm including it for the sake of being thorough
-	  module.exports = (root.vs = factory(require("postal")));
+(function(root, factory) {
+	if (typeof define === "function" && define.amd) {
+		// Now we're wrapping the factory and assigning the return
+		// value to the root (window) and returning it as well to
+		// the AMD loader.
+		define(["postal"], function(postal) {
+			return (root.vs = factory(postal));
+		});
+	} else if (typeof module === "object" && module.exports) {
+		// I've not encountered a need for this yet, since I haven't
+		// run into a scenario where plain modules depend on CommonJS
+		// *and* I happen to be loading in a CJS browser environment
+		// but I'm including it for the sake of being thorough
+		module.exports = (root.vs = factory(require("postal")));
 	} else {
-	  root.vs = factory(root.postal);
+		root.vs = factory(root.postal);
 	}
-  }(this, function(postal) {
+}(this, function(postal) {
 	//Mathutils never fails me!
 	var Mathutils = {
 		normalize: function($value, $min, $max) {
@@ -45,8 +45,8 @@
 	}
 
 
-	function $$(el){
-	return el.nodeName ? el : el[0].nodeName ? el[0] : document.querySelector(el);
+	function $$(el) {
+		return el.nodeName ? el : el[0].nodeName ? el[0] : document.querySelector(el);
 	}
 
 
@@ -68,10 +68,10 @@
 
 		//it might be a config object
 		// override with options
-		if(options !== undefined && typeof(options) == "object") {
-			for(var key in defaults) {
-				if(options.hasOwnProperty(key)) {
-					if(key === "scroll") {
+		if (options !== undefined && typeof(options) == "object") {
+			for (var key in defaults) {
+				if (options.hasOwnProperty(key)) {
+					if (key === "scroll") {
 						defaults.userScroll = options[key];
 						defaults[key] = function(options) {
 							defaults.userScroll(options);
@@ -86,74 +86,74 @@
 
 
 		// save configuration variables based on the condition
-		switch(defaults.condition) {
+		switch (defaults.condition) {
 			case 1:
-			defaults.start.when = 0;
-			defaults.start.is = 1;
-			defaults.end.when = 1;
-			defaults.end.is =  0;
-			break;
-			case 2: 
-			defaults.start.when = 1;
-			defaults.start.is = 1;
-			defaults.end.when = 0;
-			defaults.end.is = 0;
-			break;
+				defaults.start.when = 0;
+				defaults.start.is = 1;
+				defaults.end.when = 1;
+				defaults.end.is = 0;
+				break;
+			case 2:
+				defaults.start.when = 1;
+				defaults.start.is = 1;
+				defaults.end.when = 0;
+				defaults.end.is = 0;
+				break;
 			case 3:
-			defaults.start.when = 0;
-			defaults.start.is = 0;
-			defaults.end.when = 1;
-			defaults.end.is =  1;
-			break;
+				defaults.start.when = 0;
+				defaults.start.is = 0;
+				defaults.end.when = 1;
+				defaults.end.is = 1;
+				break;
 			case 4:
-			defaults.start.when = 0;
-			defaults.start.is = 0;
-			defaults.end.when = 1;
-			defaults.end.is =  0;
-			break;
+				defaults.start.when = 0;
+				defaults.start.is = 0;
+				defaults.end.when = 1;
+				defaults.end.is = 0;
+				break;
 			case 5:
-			defaults.start.when = 0;
-			defaults.start.is = 1;
-			defaults.end.when = 1;
-			defaults.end.is =  1;
-			break;
+				defaults.start.when = 0;
+				defaults.start.is = 1;
+				defaults.end.when = 1;
+				defaults.end.is = 1;
+				break;
 			case 6:
-			defaults.start.when = Number(options.start.when.split("%")[0]) / 100;
-			defaults.start.is = Number(options.start.is.split("%")[0]) / 100;
-			defaults.end.when = Number(options.end.when.split("%")[0]) / 100;
-			defaults.end.is =  Number(options.end.is.split("%")[0]) / 100;
-			break;
+				defaults.start.when = Number(options.start.when.split("%")[0]) / 100;
+				defaults.start.is = Number(options.start.is.split("%")[0]) / 100;
+				defaults.end.when = Number(options.end.when.split("%")[0]) / 100;
+				defaults.end.is = Number(options.end.is.split("%")[0]) / 100;
+				break;
 		}
 
 
-	// MONITOR THESE
-	var last_known_scroll_position = 0,
-		ticking = false,
-		$win = window,
-		wHeight,
-		wBottom,
-		wTop = 0,
-		i,
-		tmpVals,
-		$tmpPiggy = $$(elem_or_selector),
-		active = false;
+		// MONITOR THESE
+		var last_known_scroll_position = 0,
+			ticking = false,
+			$win = window,
+			wHeight,
+			wBottom,
+			wTop = 0,
+			i,
+			tmpVals,
+			$tmpPiggy = $$(elem_or_selector),
+			active = false;
 
-	function doSomething(scroll_pos) {
-		wTop = scroll_pos;
-		wBottom = wTop + wHeight;
+		function doSomething(scroll_pos) {
+			wTop = scroll_pos;
+			wBottom = wTop + wHeight;
 
-			
+
 			//check if we're inside the window start and end.
 			if (pWhenStart < wTop + (wHeight * defaults.start.is) &&
-			pWhenEnd > wTop + (wHeight * defaults.end.is) &&
-			!active) {
-				
+				pWhenEnd > wTop + (wHeight * defaults.end.is) &&
+				!active) {
+
 				//call once if we haven't activated yet, and call() exists
 				if (defaults.start.hasOwnProperty("call") && !active) {
 
 					//check if it's coming on from the bottom
 					//console.log(pTop, pHeight, pWhenStart, pWhenEnd, wTop);
-					if(wTop > pTop) {
+					if (wTop > pTop) {
 						defaults.start.call(false);
 					} else {
 						defaults.start.call(true);
@@ -175,7 +175,7 @@
 
 				if ((pWhenEnd > wTop + (wHeight * defaults.end.is))) {
 					//off bottom
-					
+
 					//if we have values to check, equalize the values proportionally to trackPerc
 					if (defaults.hasOwnProperty("scroll")) {
 						if (defaults.start.hasOwnProperty("vals") && defaults.end.hasOwnProperty("vals")) {
@@ -241,11 +241,11 @@
 					doSomething(last_known_scroll_position);
 					ticking = false;
 				});
-				
+
 				ticking = true;
 
 			}
-		
+
 		});
 
 
@@ -261,18 +261,21 @@
 			pWhenEnd = pTop + (pHeight * defaults.end.when);
 		}
 
-		
 
-		
+
 
 		//set winHeight on resize
-		window.addEventListenr('resize',function() {
+		window.addEventListener('resize', function() {
 			recalculate();
 			doSomething(last_known_scroll_position);
-		}, { passive: true });
+		}, {
+			passive: true
+		});
 
 		recalculate();
 
 		return false;
 	}
+
+	return vs;
 }));

@@ -142,43 +142,59 @@
 	<section id="sec_6"></section>
 		
 
-	<script type="text/javascript" src="js/libs/jquery-1.9.1.min.js"></script>
+	
 	<script type="text/javascript" src="js/libs/TweenMax.min.js"></script>
 	<script type="text/javascript" src="../../dist/vs.min.js"></script>
 
 	<script>
 
-		/*
-			Build out the animation of our hero slicing the head off of a monster
-			++ Set the default easing to no-easing. Personal preference.
-		*/
-		var tl_example = new TimelineLite();
-		//TweenLite.defaultEase = Linear.easeNone;
+	console.clear();
 
-		/*
-			Construct each element's transition in the animation.
-			The 2nd argument is the length of the animation, and as you'll see, doesn't matter. 10 is good.
-			Then you can think in terms of 1 second being 10% of the total animation length.
-			How long the animation takes is controlled by how fast the user scrolls, what's important is the
-			sequence's flow.
-		*/
-		var head = 			new TweenLite.to($('.beast-head', '#sec_4'), 10, {x: 80, y:120, rotationZ: -15});
-		var beast =			new TweenLite.to($('.beast', '#sec_4'), 10, {x:100});
-		var blood = 		new TweenLite.from($('.beast-blood', '#sec_4'), 1, {delay:5, width: 1});
-		var bloodMove = 	new TweenLite.to($('.beast-blood', '#sec_4'), 10, {x:100});
-		var hero = 			new TweenLite.to($('.hero', '#sec_4'), 10, {x:-100});
-		var grass = 		new TweenLite.to($('.grass', '#sec_4'), 10, {x:-180});
-		var frame = 		new TweenLite.to($('.frame', '#sec_4'), 10, {x:80});
-		var thumbnails = 	new TweenLite.to($('.thumbnails', '#sec_4'), 10, {x:130});
+	/*
+		Build out the animation we'll be testing (Uses GSAP's TimelineLite)
+	*/
+	var tl_example = new TimelineLite();
 
-		tl_example.add( [head, beast, blood, bloodMove, hero, grass, frame, thumbnails] );
-		tl_example.pause();
+	//linear easing is best
+	TweenLite.defaultEase = Linear.easeNone;
+
+	//construct each transition in the sequence. as if each sequence is 10 seconds long, 1 second is 10% of the total animation length. makes it a little easier to visualize.
+	var head = new TweenLite.to('#sec_4 .beast-head', 10, {
+		x: 80,
+		y: 120,
+		rotationZ: -15
+	});
+	var beast = new TweenLite.to('#sec_4 .beast', 10, {
+		x: 100
+	});
+	var blood = new TweenLite.from('#sec_4 .beast-blood', 1, {
+		delay: 5,
+		width: 1
+	});
+	var bloodMove = new TweenLite.to('#sec_4 .beast-blood', 10, {
+		x: 100
+	});
+	var hero = new TweenLite.to('#sec_4 .hero', 10, {
+		x: -100
+	});
+	var grass = new TweenLite.to('#sec_4 .grass', 10, {
+		x: -180
+	});
+	var frame = new TweenLite.to('#sec_4 .frame', 10, {
+		x: 80
+	});
+	var thumbnails = new TweenLite.to('#sec_4.thumbnails', 10, {
+		x: 130
+	});
+
+	//add tweens to timeline and pause them.
+	tl_example.add([head, beast, blood, bloodMove, hero, grass, frame, thumbnails]);
+	tl_example.pause();
 
 
-
-		//use VectorScrolling in it's most basic form
-		vs("#sec_4", tl_example);
-
+	vs("#sec_4", tl_example, {
+		condition: 1
+	});
 
 	</script>
 
