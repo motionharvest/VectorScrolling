@@ -273,7 +273,7 @@
 		});
 
 		recalculate();
-		doSomething(last_known_scroll_position);
+		doSomething(last_known_scroll_position); 
 
 		return false;
 	}
