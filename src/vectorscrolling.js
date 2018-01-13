@@ -127,7 +127,7 @@
 
 
 		// MONITOR THESE
-		var last_known_scroll_position = 0,
+		var last_known_scroll_position = window.scrollY,
 			ticking = false,
 			$win = window,
 			wHeight,
