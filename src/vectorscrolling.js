@@ -58,11 +58,14 @@
 		var defaults = {
 			condition: 1,
 			start: {},
-			end: {}
+			end: {},
+			override: false
 		}
 
 		defaults.scroll = function(options) {
-			timeline.seek(timeline.totalDuration() * options.offset)
+			if(!defaults.override) {
+				timeline.seek(timeline.totalDuration() * options.offset);
+			}
 		}
 
 
@@ -75,7 +78,9 @@
 						defaults.userScroll = options[key];
 						defaults[key] = function(options) {
 							defaults.userScroll(options);
-							timeline.seek(timeline.totalDuration() * options.offset);
+							if(!defaults.override) {
+								timeline.seek(timeline.totalDuration() * options.offset);
+							}
 						}
 					} else {
 						defaults[key] = options[key];

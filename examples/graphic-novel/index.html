@@ -192,9 +192,29 @@
 	tl_example.pause();
 
 
+	var seekOffset = 0;
 	vs("#sec_4", tl_example, {
-		condition: 1
+		condition: 1,
+		override: true,
+		scroll: function (options) {
+			seekOffset = options.offset;
+		}
 	});
+
+	var sluggishness = 10;
+	var slowOffset = 0;
+	function slowSeek() {
+		slowOffset += (seekOffset - slowOffset) / sluggishness;
+		requestAnimationFrame(slowSeek);
+		tl_example.seek(tl_example.totalDuration() * slowOffset)
+	}
+	slowSeek();
+
+
+
+
+
+
 
 	</script>
 
