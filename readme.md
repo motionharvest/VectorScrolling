@@ -1,3 +1,7 @@
+Install
+==============================
+`npm install --save-dev vectorscrolling`
+
 Control, control, control
 ==============================
 I have determined that there are 5 different ways that you might need control your scrolling animations. Look at the visual aid below.
