@@ -1,8 +1,17 @@
 Install
 ==============================
-`npm install --save-dev vectorscrolling`
+`npm install vectorscrolling --save-dev`
 
-Control, control, control
+Here is how you use it.
+--
+#### Control a GSAP Timeline Animation ####
+
+	vs("#myTarget", myGSAPTimeline);
+
+
+
+
+GSAP Timelines is all it controls
 ==============================
 I have determined that there are 5 different ways that you might need control your scrolling animations. Look at the visual aid below.
 
@@ -20,14 +29,8 @@ The logic here is to active when `what percentage of your element's height` is `
 
 ![](README/howtofarm.jpg)
 
-Here is how you use it.
+Configuration Options
 --
-#### Control a GSAP Timeline Animation ####
-
-	vs("#myTarget", myGSAPTimeline);
-
-
-
 
 #### Customize the Scroll Condition ####
 
