@@ -1,25 +1,27 @@
 Install
 ==============================
-`npm install vectorscrolling --save-dev`
+	npm install vectorscrolling --save-dev
 
-Here is how you use it.
---
+
 #### Control a GSAP Timeline Animation ####
-
+	const vs = require('vectorscrolling');
 	vs("#myTarget", myGSAPTimeline);
+	
 
-
-
-
-GSAP Timelines is all it controls
+Using VectorScrolling
 ==============================
-I have determined that there are 5 different ways that you might need control your scrolling animations. Look at the visual aid below.
+Does the animation start as your element is coming into view? Or does the animation wait until the entire element is centered on the screen? Maybe the element is already on the screen at page load (Like a navigation bar), and you want to animate it as the user scrolls down your page. It's up to you.
 
-The 5 Element Positions
+The 5 Element Positions and the Vernacular
 ---
-Since I'm a creative technologist this description of how it works is most likely going to be complicated. You target any of your elements and think about when it comes into view. Does the animation start as it comes into view, or does the animation wait until the entire element is on the screen? This whole system is based on percentages. The elements you target will have a point which activates the animation, and another point which deactivates it.
+Target your element and think about how and when it shows up on the screen. Think in percentages. The screen's height ranges from 0% at the top to 100% at the bottom. Your element's top edge can be considered 0%, and it's bottom edge is 100%. With that in mind, if the top of your element is touching the top of the screen you'd say that 0% of the element is at 0% of the browser window.
 
-The logic here is to active when `what percentage of your element's height` is `less than what percentage of the screen's height` and vice-versa for deactivating. Here are the 5 element positions for activation and deactivation, and a handy graphic for explaining them.
+Adding logic for start and end points.
+---
+
+The logic here requires some time to grasp. Ths image below can help to illustrate this.
+
+The way I think about how a scrolling experience works is to break sections of animation into pieces. When do I want the animation to start being affected by the scrolling. My internal dialog says "when `what percentage of my element's height` is at `what percentage of the screen's height`, start controlling it." And then, "when `what percentage of my element's height` is `what percentage of the screen's height`, stop controlling it." Here are the 5 element positions for activation and deactivation, and that graphic I mentioned.
 
  1. Activate when 0% is at 100%, deactivate when 100% is at 0%.
  2. Activate when 100% is at 100%, deactivate when 0% is at 0%.
