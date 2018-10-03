@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset=utf-8 />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width">
+
+	<title>Example | Conveyor</title>
+
+	<style>
+        html, body {
+            margin: 0; padding: 0;
+        }
+        body {
+            overflow-x: hidden;
+        }
+        * {
+            box-sizing: border-box;
+        }
+        .panel {
+            perspective-origin: 50% 0%;
+            perspective: 800px;
+            width: 100%;
+            height: 500px;
+            text-align: middle;
+        }
+
+        .p3d {
+            perspective: 800px;
+            height: 500px;
+            width: 100%;
+            transform: rotateX(-80deg);
+            transform-origin: 50% 0%;
+            position: absolute;
+        }
+        .red .p3d {
+            background: red;
+        }
+        .orange .p3d{
+            background: orange;
+        }
+
+        .yellow .p3d{
+            background: yellow;
+        }
+
+        .green .p3d{
+            background: green;
+        }
+
+        .blue .p3d{
+            background: blue;
+        }
+
+        .purple .p3d{
+            background: purple;
+        }
+
+        .violet .p3d{
+            background: violet;
+        }
+
+	</style>
+
+</head>
+
+<body>
+	
+    <div class="panel red panel1"><div class="p3d"></div></div>
+    <div class="panel orange panel2"><div class="p3d"></div></div>
+    <div class="panel yellow panel3"><div class="p3d"></div></div>
+    <div class="panel green"><div class="p3d"></div></div>
+    <div class="panel blue"><div class="p3d"></div></div>
+    <div class="panel purple"><div class="p3d"></div></div>
+    <div class="panel violet"><div class="p3d"></div></div>
+    <div class="panel red"><div class="p3d"></div></div>
+    <div class="panel orange"><div class="p3d"></div></div>
+    <div class="panel yellow"><div class="p3d"></div></div>
+    <div class="panel green"><div class="p3d"></div></div>
+    <div class="panel blue"><div class="p3d"></div></div>
+    <div class="panel purple"><div class="p3d"></div></div>
+    <div class="panel violet"><div class="p3d"></div></div>
+    <div class="panel red"><div class="p3d"></div></div>
+    <div class="panel orange"><div class="p3d"></div></div>
+    <div class="panel yellow"><div class="p3d"></div></div>
+    <div class="panel green"><div class="p3d"></div></div>
+    <div class="panel blue"><div class="p3d"></div></div>
+    <div class="panel purple"><div class="p3d"></div></div>
+    <div class="panel violet"><div class="p3d"></div></div>
+    <div class="panel red"><div class="p3d"></div></div>
+    <div class="panel orange"><div class="p3d"></div></div>
+    <div class="panel yellow"><div class="p3d"></div></div>
+    <div class="panel green"><div class="p3d"></div></div>
+    <div class="panel blue"><div class="p3d"></div></div>
+    <div class="panel purple"><div class="p3d"></div></div>
+    <div class="panel violet"><div class="p3d"></div></div>
+		
+
+	<script type="text/javascript" src="js/libs/jquery.min.js"></script>
+	<script type="text/javascript" src="js/libs/TweenMax.min.js"></script>
+	<script type="text/javascript" src="../../dist/vs.min.js"></script>
+
+	<script>
+
+	console.clear();
+    TweenLite.defaultEase = Linear.easeNone;
+
+
+    var $panels = $('.panel');
+
+    $panels.each(function(i, elem) {
+
+        //element to tween
+        var $elem = $(elem).find('.p3d');
+
+        //timeline to control
+        var tl = new TimelineMax();
+        tl.pause();
+
+        tl.to($elem, 10, {
+            rotationX: 0
+        });
+
+        //set up scroll controll.
+        vs(elem, tl, {
+            condition: 5
+        });
+    });
+
+
+	</script>
+
+</body>
+</html>

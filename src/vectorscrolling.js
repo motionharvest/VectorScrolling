@@ -141,7 +141,8 @@
 			i,
 			tmpVals,
 			$tmpPiggy = $$(elem_or_selector),
-			active = false;
+			active = false,
+			firstLoad = true;
 
 		function doSomething(scroll_pos) {
 			wTop = scroll_pos;
@@ -213,6 +214,14 @@
 					}
 
 				}
+			} else if(firstLoad) {
+				firstLoad = false;
+				//todo check if it's above or below
+
+				//for now, I' just gonna put it on it's end
+				defaults.scroll({
+					offset: 1
+				});
 			}
 
 			//If a scroll is active I'd like to know how far through it is.
@@ -236,13 +245,13 @@
 			}
 		}
 
-		window.addEventListener('scroll', function(e) {
-
+		function scrollHandler(e) {
 			last_known_scroll_position = window.scrollY;
 
 			if (!ticking) {
 
 				window.requestAnimationFrame(function() {
+					recalculate();
 					doSomething(last_known_scroll_position);
 					ticking = false;
 				});
@@ -250,9 +259,9 @@
 				ticking = true;
 
 			}
+		}
 
-		});
-
+		window.addEventListener('scroll', scrollHandler);
 
 
 		function recalculate() {
