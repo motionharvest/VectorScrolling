@@ -86,7 +86,10 @@
     circleAnimation.pause();
 
 	vs(".section-one", circleAnimation, {
-		condition: 4
+		condition: 4,
+        scroll: function(offset) {
+            console.log(offset);
+        }
 	});
 
 
@@ -98,7 +101,7 @@
     squareAnimation.pause();
 
 	vs(".section-two", squareAnimation, {
-		condition: 5
+        condition: 5
 	});
 
 	</script>
