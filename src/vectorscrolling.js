@@ -141,7 +141,7 @@
 			i,
 			tmpVals,
 			$tmpPiggy = $$(elem_or_selector),
-			active = false,
+			active = true,
 			firstLoad = true;
 
 		function doSomething(scroll_pos) {
@@ -216,12 +216,11 @@
 				}
 			} else if(firstLoad) {
 				firstLoad = false;
-				//todo check if it's above or below
-
+				
 				//for now, I' just gonna put it on it's end
 				defaults.scroll({
-					offset: 1
-				});
+			 		offset: 1
+			 	});
 			}
 
 			//If a scroll is active I'd like to know how far through it is.
@@ -286,8 +285,9 @@
 			passive: true
 		});
 
-		recalculate();
+		//recalculate();
 		//doSomething(last_known_scroll_position); 
+		window.scrollTo(window.scrollX, window.scrollY);
 
 		return false;
 	}

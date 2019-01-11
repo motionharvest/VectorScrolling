@@ -1,0 +1,99 @@
+0 info it worked if it ends with ok
+1 verbose cli [ '/Users/aaronsherrill/.nvm/versions/node/v6.11.1/bin/node',
+1 verbose cli   '/Users/aaronsherrill/.nvm/versions/node/v6.11.1/bin/npm',
+1 verbose cli   'publish' ]
+2 info using npm@3.10.10
+3 info using node@v6.11.1
+4 verbose publish [ '.' ]
+5 silly cache add args [ '.', null ]
+6 verbose cache add spec .
+7 silly cache add parsed spec Result {
+7 silly cache add   raw: '.',
+7 silly cache add   scope: null,
+7 silly cache add   escapedName: null,
+7 silly cache add   name: null,
+7 silly cache add   rawSpec: '.',
+7 silly cache add   spec: '/Users/aaronsherrill/Lab/VectorScrolling',
+7 silly cache add   type: 'directory' }
+8 verbose addLocalDirectory /Users/aaronsherrill/.npm/vectorscrolling/2.0.13/package.tgz not in flight; packing
+9 verbose correctMkdir /Users/aaronsherrill/.npm correctMkdir not in flight; initializing
+10 info lifecycle vectorscrolling@2.0.13~prepublish: vectorscrolling@2.0.13
+11 silly lifecycle vectorscrolling@2.0.13~prepublish: no script for prepublish, continuing
+12 verbose tar pack [ '/Users/aaronsherrill/.npm/vectorscrolling/2.0.13/package.tgz',
+12 verbose tar pack   '/Users/aaronsherrill/Lab/VectorScrolling' ]
+13 verbose tarball /Users/aaronsherrill/.npm/vectorscrolling/2.0.13/package.tgz
+14 verbose folder /Users/aaronsherrill/Lab/VectorScrolling
+15 verbose addLocalTarball adding from inside cache /Users/aaronsherrill/.npm/vectorscrolling/2.0.13/package.tgz
+16 verbose correctMkdir /Users/aaronsherrill/.npm correctMkdir not in flight; initializing
+17 silly cache afterAdd vectorscrolling@2.0.13
+18 verbose afterAdd /Users/aaronsherrill/.npm/vectorscrolling/2.0.13/package/package.json not in flight; writing
+19 verbose correctMkdir /Users/aaronsherrill/.npm correctMkdir not in flight; initializing
+20 verbose afterAdd /Users/aaronsherrill/.npm/vectorscrolling/2.0.13/package/package.json written
+21 silly publish { name: 'vectorscrolling',
+21 silly publish   version: '2.0.13',
+21 silly publish   description: 'Scrolling animation library. A practical website implementation for animation designers and graphic artists. Leverating GSAP out of the box, but compatible with any technology with a seek() method.',
+21 silly publish   main: 'dist/vs.min.js',
+21 silly publish   directories: { example: 'examples' },
+21 silly publish   scripts: { test: 'echo "Error: no test specified" && exit 1' },
+21 silly publish   repository:
+21 silly publish    { type: 'git',
+21 silly publish      url: 'git+https://github.com/cmndo/VectorScrolling.git' },
+21 silly publish   keywords:
+21 silly publish    [ 'scrolling',
+21 silly publish      'animation',
+21 silly publish      'gsap',
+21 silly publish      'timeline',
+21 silly publish      'scroll',
+21 silly publish      'iphone',
+21 silly publish      'mobile',
+21 silly publish      'magic',
+21 silly publish      'handy' ],
+21 silly publish   author: { name: 'Aaron Sherrill' },
+21 silly publish   license: 'MIT',
+21 silly publish   bugs: { url: 'https://github.com/cmndo/VectorScrolling/issues' },
+21 silly publish   homepage: 'https://cmndo.github.io/VectorScrolling/',
+21 silly publish   devDependencies:
+21 silly publish    { gulp: '^3.9.1',
+21 silly publish      'gulp-rename': '^1.2.2',
+21 silly publish      'gulp-uglify': '^2.1.2' },
+21 silly publish   readme: 'Install\n==============================\n\tnpm install vectorscrolling --save-dev\n\n\n#### Control a GSAP Timeline Animation ####\n\tconst vs = require(\'vectorscrolling\');\n\tvs("#myTarget", myGSAPTimeline);\n\t\n\nUsing VectorScrolling\n==============================\nDoes the animation start as your element is coming into view? Or does the animation wait until the entire element is centered on the screen? Maybe the element is already on the screen at page load (Like a navigation bar), and you want to animate it as the user scrolls down your page. It\'s up to you.\n\nThe 5 Element Positions and the Vernacular\n---\nTarget your element and think about how and when it shows up on the screen. Think in percentages. The screen\'s height ranges from 0% at the top to 100% at the bottom. Your element\'s top edge can be considered 0%, and it\'s bottom edge is 100%. With that in mind, if the top of your element is touching the top of the screen you\'d say that 0% of the element is at 0% of the browser window.\n\nAdding logic for start and end points.\n---\n\nThe logic here requires some time to grasp. Ths image below can help to illustrate this.\n\nThe way I think about how a scrolling experience works is to break sections of animation into pieces. When do I want the animation to start being affected by the scrolling. My internal dialog says "when `what percentage of my element\'s height` is at `what percentage of the screen\'s height`, start controlling it." And then, "when `what percentage of my element\'s height` is `what percentage of the screen\'s height`, stop controlling it." Here are the 5 element positions for activation and deactivation, and that graphic I mentioned.\n\n 1. Activate when 0% is at 100%, deactivate when 100% is at 0%.\n 2. Activate when 100% is at 100%, deactivate when 0% is at 0%.\n 3. Activate when 0% is at 0%, deactivate when 100% is at 100%.\n 4. Activate when 0% is at 0%, deactivate when 100% is at 0%.\n 5. Activate when 0% is at 100%, deactivate when 100% is at 100%.\n\n![](README/howtofarm.jpg)\n\nConfiguration Options\n--\n\n#### Customize the Scroll Condition ####\n\n\tvs("#myTarget", myGSAPTimeline, {\n\t\tcondition: 2\n\t});\n\n\n#### Advanced - Condition 6 - Custom Everything ####\n\n\tvs("#myTarget", myGSAPTimeline, {\n\t\tcondition: 6,\n\t\tstart: {\n\t\t\twhen: "25%",\n\t\t\tis: "100%",\n\t\t\tvals: {\n\t\t\t\tstep: 0\n\t\t\t},\n\t\t\tcall: function(){\n\t\t\t\tconsole.log("this element has entered the start condition");\n\t\t\t}\n\t\t},\n\t\tend: {\n\t\t\twhen: "75%",\n\t\t\tis: "0%",\n\t\t\tvals: {\n\t\t\t\tstep: 255\n\t\t\t},\n\t\t\tcall: function(){\n\t\t\t\tconsole.log("this element has left the end condition");\n\t\t\t}\n\t\t},\n\t\tscroll: function(vals) {\n\t\t\tconsole.log(vals); \n\t\t\t// returns vals object with properties at their percentage through the states.\n\t\t}\n\t});\n\n\nPower Options\n---\nIf you look at condition 6, you\'ll notice a bunch of options. These are available for all of the above examples. You can leverage the time-saving features with the default condition, but also react when the element is within the condition\'s range. Below I\'m using the default condition (1) by not specifying it, but using the advanced feature of overriding the scroll method.\n\n\n\tvs("#myTarget", myGSAPTimeline, {\n\t\tstart: {\n\t\t\tvals: {\n\t\t\t\tmiles: 100\n\t\t\t}\n\t\t},\n\t\tend: {\n\t\t\tvals: {\n\t\t\t\tmiles: 200\n\t\t\t}\n\t\t},\n\t\tscroll: function(vals) {\n\t\t\tconsole.log(vals)\n\t\t}\n\t});\n\n\nHave fun\n---\n[Demo](https://codepen.io/motionharvest/full/PwoRyx/)\n',
+21 silly publish   readmeFilename: 'readme.md',
+21 silly publish   gitHead: '13f268ab38769ec1e3eb5078885a62759a853a2b',
+21 silly publish   _id: 'vectorscrolling@2.0.13',
+21 silly publish   _shasum: '4daa58d77f07f299a3d7f38575e698f7eff50b63',
+21 silly publish   _from: '.' }
+22 verbose getPublishConfig undefined
+23 silly mapToRegistry name vectorscrolling
+24 silly mapToRegistry using default registry
+25 silly mapToRegistry registry https://registry.npmjs.org/
+26 silly mapToRegistry data Result {
+26 silly mapToRegistry   raw: 'vectorscrolling',
+26 silly mapToRegistry   scope: null,
+26 silly mapToRegistry   escapedName: 'vectorscrolling',
+26 silly mapToRegistry   name: 'vectorscrolling',
+26 silly mapToRegistry   rawSpec: '',
+26 silly mapToRegistry   spec: 'latest',
+26 silly mapToRegistry   type: 'tag' }
+27 silly mapToRegistry uri https://registry.npmjs.org/vectorscrolling
+28 verbose publish registryBase https://registry.npmjs.org/
+29 silly publish uploading /Users/aaronsherrill/.npm/vectorscrolling/2.0.13/package.tgz
+30 verbose stack Error: auth required for publishing
+30 verbose stack     at CachingRegistryClient.publish (/Users/aaronsherrill/.nvm/versions/node/v6.11.1/lib/node_modules/npm/node_modules/npm-registry-client/lib/publish.js:30:14)
+30 verbose stack     at /Users/aaronsherrill/.nvm/versions/node/v6.11.1/lib/node_modules/npm/lib/publish.js:138:14
+30 verbose stack     at mapToRegistry (/Users/aaronsherrill/.nvm/versions/node/v6.11.1/lib/node_modules/npm/lib/utils/map-to-registry.js:62:3)
+30 verbose stack     at publish_ (/Users/aaronsherrill/.nvm/versions/node/v6.11.1/lib/node_modules/npm/lib/publish.js:107:3)
+30 verbose stack     at Array.<anonymous> (/Users/aaronsherrill/.nvm/versions/node/v6.11.1/lib/node_modules/npm/node_modules/slide/lib/bind-actor.js:15:8)
+30 verbose stack     at LOOP (/Users/aaronsherrill/.nvm/versions/node/v6.11.1/lib/node_modules/npm/node_modules/slide/lib/chain.js:15:14)
+30 verbose stack     at LOOP (/Users/aaronsherrill/.nvm/versions/node/v6.11.1/lib/node_modules/npm/node_modules/slide/lib/chain.js:14:28)
+30 verbose stack     at chain (/Users/aaronsherrill/.nvm/versions/node/v6.11.1/lib/node_modules/npm/node_modules/slide/lib/chain.js:20:5)
+30 verbose stack     at /Users/aaronsherrill/.nvm/versions/node/v6.11.1/lib/node_modules/npm/lib/publish.js:73:5
+30 verbose stack     at RES (/Users/aaronsherrill/.nvm/versions/node/v6.11.1/lib/node_modules/npm/node_modules/inflight/inflight.js:23:14)
+31 verbose cwd /Users/aaronsherrill/Lab/VectorScrolling
+32 error Darwin 18.2.0
+33 error argv "/Users/aaronsherrill/.nvm/versions/node/v6.11.1/bin/node" "/Users/aaronsherrill/.nvm/versions/node/v6.11.1/bin/npm" "publish"
+34 error node v6.11.1
+35 error npm  v3.10.10
+36 error code ENEEDAUTH
+37 error need auth auth required for publishing
+38 error need auth You need to authorize this machine using `npm adduser`
+39 verbose exit [ 1, true ]
