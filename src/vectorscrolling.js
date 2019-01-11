@@ -214,13 +214,6 @@
 					}
 
 				}
-			} else if(firstLoad) {
-				firstLoad = false;
-				
-				//for now, I' just gonna put it on it's end
-				defaults.scroll({
-			 		offset: 1
-			 	});
 			}
 
 			//If a scroll is active I'd like to know how far through it is.
