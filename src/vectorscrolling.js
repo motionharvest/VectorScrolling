@@ -64,7 +64,7 @@
 
 		defaults.scroll = function(options) {
 			if(!defaults.override) {
-				timeline.seek(timeline.totalDuration() * options.offset);
+				timeline.seek(timeline.totalDuration() * options.offset, false);
 			}
 		}
 
@@ -79,7 +79,7 @@
 						defaults[key] = function(options) {
 							defaults.userScroll(options);
 							if(!defaults.override) {
-								timeline.seek(timeline.totalDuration() * options.offset);
+								timeline.seek(timeline.totalDuration() * options.offset, false);
 							}
 						}
 					} else {
