@@ -100,10 +100,14 @@
     })
     squareAnimation.pause();
 
-	vs(".section-two", squareAnimation, {
+	var k = vs(".section-two", squareAnimation, {
         condition: 5
 	});
 
+
+    setInterval(() => {
+        console.log(k.getOffset());
+    }, 1000);
 	</script>
 
 </body>

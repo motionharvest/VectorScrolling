@@ -142,7 +142,8 @@
 			tmpVals,
 			$tmpPiggy = $$(elem_or_selector),
 			active = true,
-			firstLoad = true;
+			firstLoad = true,
+			trackPerc = 0;
 
 		function doSomething(scroll_pos) {
 			wTop = scroll_pos;
@@ -187,6 +188,7 @@
 						if (defaults.start.hasOwnProperty("vals") && defaults.end.hasOwnProperty("vals")) {
 							defaults.scroll(defaults.start.vals);
 						} else {
+							trackPerc = 0;
 							defaults.scroll({
 								offset: 0
 							});
@@ -203,6 +205,7 @@
 						if (defaults.start.hasOwnProperty("vals") && defaults.end.hasOwnProperty("vals")) {
 							defaults.scroll(defaults.end.vals);
 						} else {
+							trackPerc = 1;
 							defaults.scroll({
 								offset: 1
 							});
@@ -282,7 +285,11 @@
 		//doSomething(last_known_scroll_position); 
 		window.scrollTo(window.scrollX, window.scrollY);
 
-		return false;
+		return {
+			getOffset: function() {
+				return trackPerc;
+			}
+		};
 	}
 
 	return vs;
