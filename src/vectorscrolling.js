@@ -59,12 +59,13 @@
 			condition: 1,
 			start: {},
 			end: {},
-			override: false
+			override: false,
+			timeline: timeline
 		}
 
 		defaults.scroll = function(options) {
 			if(!defaults.override) {
-				timeline.seek(timeline.totalDuration() * options.offset, false);
+				timeline.seek(timeline.totalDuration() * options.offset);
 			}
 		}
 
