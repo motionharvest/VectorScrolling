@@ -49,17 +49,31 @@
 		return el.nodeName ? el : el[0].nodeName ? el[0] : document.querySelector(el);
 	}
 
-
+	/*
+		I want to change this to this format
+		vs(squareAnimation, {
+			trigger: ".section-two",
+			start: "top top",
+			end: "bottom bottom"
+		});
+	*/
 
 	//Animate GSAP Timelines as you scroll.
-	var vs = function(elem_or_selector, timeline, options) {
+	var vs = function(timeline, options) {
+		
 
 		// base options
 		var defaults = {
-			condition: 1,
-			start: {},
-			end: {},
+			trigger: undefined,
+			start: "top bottom",
+			end: "bottom top",
 			override: false
+		}
+
+		var presets = {
+			"top": 0,
+			"middle": .5,
+			"bottom": 1
 		}
 
 		defaults.scroll = function(options) {
@@ -89,47 +103,43 @@
 			}
 		}
 
+		
 
-		// save configuration variables based on the condition
-		switch (defaults.condition) {
-			case 1:
-				defaults.start.when = 0;
-				defaults.start.is = 1;
-				defaults.end.when = 1;
-				defaults.end.is = 0;
-				break;
-			case 2:
-				defaults.start.when = 1;
-				defaults.start.is = 1;
-				defaults.end.when = 0;
-				defaults.end.is = 0;
-				break;
-			case 3:
-				defaults.start.when = 0;
-				defaults.start.is = 0;
-				defaults.end.when = 1;
-				defaults.end.is = 1;
-				break;
-			case 4:
-				defaults.start.when = 0;
-				defaults.start.is = 0;
-				defaults.end.when = 1;
-				defaults.end.is = 0;
-				break;
-			case 5:
-				defaults.start.when = 0;
-				defaults.start.is = 1;
-				defaults.end.when = 1;
-				defaults.end.is = 1;
-				break;
-			case 6:
-				defaults.start.when = Number(options.start.when.split("%")[0]) / 100;
-				defaults.start.is = Number(options.start.is.split("%")[0]) / 100;
-				defaults.end.when = Number(options.end.when.split("%")[0]) / 100;
-				defaults.end.is = Number(options.end.is.split("%")[0]) / 100;
-				break;
+		//start
+		var startSplit = defaults.start.split(" ");
+		defaults.start = {};
+		//lets do the first one
+		//is the start.when a percentage?
+		if(startSplit[0].indexOf("%") > -1){
+			defaults.start.when = Number(startSplit[0].split("%")[0]) / 100;
+		}else{
+			//check for word: top, middle, bottom
+			defaults.start.when = presets[startSplit[0]];
 		}
 
+		if(startSplit[1].indexOf("%") > -1){
+			defaults.start.is = Number(startSplit[1].split("%")[0]) / 100;
+		}else{
+			defaults.start.is = presets[startSplit[1]];
+		}
+
+
+
+		var stopSplit = defaults.end.split(" ");
+		//lets do the second one
+		defaults.end = {};
+		if(stopSplit[0].indexOf("%") > -1){
+			defaults.end.when = Number(stopSplit[0].split("%")[0]) / 100;
+		}else{
+			//check for word: top, middle, bottom
+			defaults.end.when = presets[stopSplit[0]];
+		}
+
+		if(stopSplit[1].indexOf("%") > -1){
+			defaults.end.is = Number(stopSplit[1].split("%")[0]) / 100;
+		}else{
+			defaults.end.is = presets[stopSplit[1]];
+		}
 
 		// MONITOR THESE
 		var last_known_scroll_position = window.scrollY,
@@ -140,7 +150,7 @@
 			wTop = 0,
 			i,
 			tmpVals,
-			$tmpPiggy = $$(elem_or_selector),
+			$tmpPiggy = $$(defaults.trigger),
 			active = false,
 			firstLoad = true;
 
@@ -150,7 +160,7 @@
 
 
 			//check if we're inside the window start and end.
-			if (pWhenStart < wTop + (wHeight * defaults.start.is) &&
+			if (pWhenStart <= wTop + (wHeight * defaults.start.is) &&
 				pWhenEnd > wTop + (wHeight * defaults.end.is) &&
 				!active) {
 

@@ -67,7 +67,7 @@
 		
 
 	
-	<script type="text/javascript" src="js/libs/TweenMax.min.js"></script>
+	<script type="text/javascript" src="js/libs/gsap.min.js"></script>
 	<script type="text/javascript" src="../../dist/vs.min.js"></script>
 
 	<script>
@@ -76,30 +76,34 @@
     TweenLite.defaultEase = Linear.easeNone;
 
 
-	/*
-		Build out the animation we'll be testing (Uses GSAP's TimelineLite)
-	*/
-	var circleAnimation = new TimelineLite();
-    circleAnimation.to('.circle', 10, {
+
+    //- Circle
+	var circleAnimation = gsap.timeline({paused:true});
+    circleAnimation.to('.circle', {
+        duration: 10,
         left: "0%"
-    })
-    circleAnimation.pause();
+    });
 
-	vs(".section-one", circleAnimation, {
-		condition: 4
-	});
+    vs(circleAnimation, {
+        trigger: ".section-one",
+        start: "top top",
+        end: "bottom top"
+    });
 
 
-    //
-    var squareAnimation = new TimelineLite();
-    squareAnimation.to('.square', 10, {
+    //- Square
+    var squareAnimation = gsap.timeline({paused:true});
+    squareAnimation.to('.square', {
+        duration: 10,
         left: "100%"
-    })
-    squareAnimation.pause();
+    });
 
-	vs(".section-two", squareAnimation, {
-		condition: 5
-	});
+    vs(squareAnimation, {
+        trigger: ".section-two",
+        start: "top bottom",
+        end: "top top"
+    });
+
 
 	</script>
 

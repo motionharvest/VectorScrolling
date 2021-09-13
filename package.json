@@ -7,7 +7,8 @@
     "example": "examples"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "run": "gulp watch"
   },
   "repository": {
     "type": "git",
@@ -31,8 +32,11 @@
   },
   "homepage": "https://cmndo.github.io/VectorScrolling/",
   "devDependencies": {
-    "gulp": "^3.9.1",
+    "gulp": "^4.0.0",
     "gulp-rename": "^1.2.2",
     "gulp-uglify": "^2.1.2"
+  },
+  "dependencies": {
+    "gulp-cli": "^2.3.0"
   }
 }

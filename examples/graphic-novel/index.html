@@ -143,7 +143,7 @@
 		
 
 	
-	<script type="text/javascript" src="js/libs/TweenMax.min.js"></script>
+	<script type="text/javascript" src="js/libs/gsap.min.js"></script>
 	<script type="text/javascript" src="../../dist/vs.min.js"></script>
 
 	<script>
@@ -153,48 +153,52 @@
 	/*
 		Build out the animation we'll be testing (Uses GSAP's TimelineLite)
 	*/
-	var tl_example = new TimelineLite();
+	var tl = gsap.timeline({paused: true});
 
-	//linear easing is best
-	TweenLite.defaultEase = Linear.easeNone;
 
 	//construct each transition in the sequence. as if each sequence is 10 seconds long, 1 second is 10% of the total animation length. makes it a little easier to visualize.
-	var head = new TweenLite.to('#sec_4 .beast-head', 10, {
+	var head = tl.to('#sec_4 .beast-head', {
+		duration: 10,
 		x: 80,
 		y: 120,
 		rotationZ: -15
-	});
-	var beast = new TweenLite.to('#sec_4 .beast', 10, {
+	},"start");
+	var beast = tl.to('#sec_4 .beast', {
+		duration: 10,
 		x: 100
-	});
-	var blood = new TweenLite.from('#sec_4 .beast-blood', 1, {
+	},"start");
+	var blood = tl.from('#sec_4 .beast-blood', {
+		duration: 1,
 		delay: 5,
 		width: 1
-	});
-	var bloodMove = new TweenLite.to('#sec_4 .beast-blood', 10, {
+	},"start");
+	var bloodMove = tl.to('#sec_4 .beast-blood', {
+		duration: 10,
 		x: 100
-	});
-	var hero = new TweenLite.to('#sec_4 .hero', 10, {
+	},"start");
+	var hero = tl.to('#sec_4 .hero', {
+		duration: 10,
 		x: -100
-	});
-	var grass = new TweenLite.to('#sec_4 .grass', 10, {
+	},"start");
+	var grass = tl.to('#sec_4 .grass', {
+		duration: 10,
 		x: -180
-	});
-	var frame = new TweenLite.to('#sec_4 .frame', 10, {
+	},"start");
+	var frame = tl.to('#sec_4 .frame', {
+		duration: 10,
 		x: 80
-	});
-	var thumbnails = new TweenLite.to('#sec_4.thumbnails', 10, {
+	},"start");
+	var thumbnails = tl.to('#sec_4 .thumbnails', {
+		duration: 10,
 		x: 130
-	});
-
-	//add tweens to timeline and pause them.
-	tl_example.add([head, beast, blood, bloodMove, hero, grass, frame, thumbnails]);
-	tl_example.pause();
+	},"start");
 
 
 	var seekOffset = 0;
-	vs("#sec_4", tl_example, {
-		condition: 1,
+	vs(tl, {
+		trigger: "#sec_4",
+		start: "top middle",
+		end: "bottom top",
 		override: true,
 		scroll: function (options) {
 			seekOffset = options.offset;
@@ -206,14 +210,9 @@
 	function slowSeek() {
 		slowOffset += (seekOffset - slowOffset) / sluggishness;
 		requestAnimationFrame(slowSeek);
-		tl_example.seek(tl_example.totalDuration() * slowOffset)
+		tl.seek(tl.totalDuration() * slowOffset)
 	}
 	slowSeek();
-
-
-
-
-
 
 
 	</script>
