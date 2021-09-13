@@ -27,8 +27,8 @@ Does the animation start as your element is coming into view? Or does the animat
 
 Blatantly Rip of ScrollTrigger?
 ---
-Hey look, I was here first, so what if Greensock is bigger. We can coexist. In 4.0.0 I've been inspired by Greensock's interface for controlling the timeline. VectorScolling parses the text properties `top`, `middle`, and `bottom` so you can use the same mental model as theirs. I prefer to think of it as a less powerful oversimplification more than a rip.
----
+Hey look, I was here first, so what if Greensock is bigger. We can coexist. In 4.0.0 I've been inspired by Greensock's interface for controlling the timeline. So now it's easier to remember how to use it. VectorScolling parses the text properties `top`, `middle`, and `bottom`. Nothing else. It's just basic scrub features of ScrollTrigger, packed up in <1kb
+
 
 Have fun
 ---
