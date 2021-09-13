@@ -7,7 +7,7 @@ gulp.task('build', gulp.series(function(done) {
 
 	gulp.src(['src/*.js'])
 	.pipe(rename("vs.min.js"))
-	//.pipe(uglify())
+	.pipe(uglify())
 	.pipe(gulp.dest('dist'));
 	done()
 }));
