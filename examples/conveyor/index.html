@@ -98,13 +98,12 @@
 		
 
 	<script type="text/javascript" src="js/libs/jquery.min.js"></script>
-	<script type="text/javascript" src="js/libs/TweenMax.min.js"></script>
+	<script type="text/javascript" src="js/libs/gsap.min.js"></script>
 	<script type="text/javascript" src="../../dist/vs.min.js"></script>
 
 	<script>
 
 	console.clear();
-    TweenLite.defaultEase = Linear.easeNone;
 
 
     var $panels = $('.panel');
@@ -115,16 +114,18 @@
         var $elem = $(elem).find('.p3d');
 
         //timeline to control
-        var tl = new TimelineMax();
-        tl.pause();
+        var tl = gsap.timeline({paused:true});
 
-        tl.to($elem, 10, {
+        tl.to($elem, {
+            duration:10,
             rotationX: 0
         });
 
         //set up scroll controll.
-        vs(elem, tl, {
-            condition: 5
+        vs(tl, {
+            trigger: elem,
+            start: "top bottom",
+            end: "bottom bottom"
         });
     });
 
